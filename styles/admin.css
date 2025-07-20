@@ -1,0 +1,321 @@
+/* تنسيق لوحة الإدارة */
+.admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.admin-section {
+    background: white;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-right: 4px solid #6a56b4;
+}
+
+.admin-section h2 {
+    color: #6a56b4;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+/* تنسيق النموذج */
+.news-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.8rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #6a56b4;
+    box-shadow: 0 0 0 3px rgba(106, 86, 180, 0.1);
+}
+
+.form-group small {
+    margin-top: 0.3rem;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* أزرار النموذج */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-save,
+.btn-preview,
+.btn-reset,
+.btn-test,
+.action-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.btn-preview {
+    background: #6a56b4;
+    color: white;
+}
+
+.btn-preview:hover {
+    background: #5a4a9d;
+    transform: translateY(-1px);
+}
+
+.btn-reset {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-reset:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+}
+
+.btn-test {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-test:hover {
+    background: #138496;
+    transform: translateY(-1px);
+}
+
+.action-btn {
+    background: #f8f9fa;
+    color: #333;
+    border: 2px solid #e9ecef;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.action-btn:hover {
+    background: #e9ecef;
+    border-color: #6a56b4;
+}
+
+/* رسائل النجاح والأخطاء */
+#message-container {
+    margin-top: 1rem;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* معاينة الخبر */
+.news-preview {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px dashed #6a56b4;
+}
+
+.news-preview h3 {
+    color: #6a56b4;
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* عناصر التحكم في البحث */
+.search-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.search-controls input,
+.search-controls select {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.8rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* قائمة إدارة الأخبار */
+.news-management-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.news-management-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s;
+}
+
+.news-management-item:hover {
+    border-color: #6a56b4;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.news-management-item h4 {
+    color: #6a56b4;
+    margin-bottom: 0.5rem;
+}
+
+.news-item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.news-item-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-archive {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+.btn-archive {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-archive:hover {
+    background: #5a6268;
+}
+
+/* تحسين الاستجابة للهواتف المحمولة */
+@media (max-width: 768px) {
+    .admin-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .search-controls {
+        flex-direction: column;
+    }
+    
+    .search-controls input,
+    .search-controls select {
+        min-width: auto;
+    }
+    
+    .news-item-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .news-item-actions {
+        justify-content: flex-start;
+    }
+}

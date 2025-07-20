@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الأخبار - مجمع الأصيل التجاري</title>
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header>
+        <div class="header-content">
+            <h1>لوحة إدارة الأخبار</h1>
+            <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd">
+            <p>إضافة وإدارة أخبار مجمع الأصيل التجاري</p>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar">
+            <a href="Aseel-home-01.html">الرئيسية</a>
+            <a href="archive.html">أرشيف الأخبار</a>
+            <a href="#add-news">إضافة خبر</a>
+            <a href="#manage-news">إدارة الأخبار</a>
+    </nav>
+
+    <!-- المحتوى الرئيسي (Main Content) -->
+    <div class="container admin-container">
+        <main>
+            <!-- قسم إضافة خبر جديد -->
+            <section id="add-news" class="admin-section">
+                <h2>إضافة خبر جديد</h2>
+                
+                <form id="news-form" class="news-form">
+                    <div class="form-group">
+                        <label for="news-title">عنوان الخبر *</label>
+                        <input type="text" id="news-title" name="title" required 
+                               placeholder="أدخل عنوان الخبر...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-date">تاريخ النشر *</label>
+                        <input type="date" id="news-date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-category">فئة الخبر *</label>
+                        <select id="news-category" name="category" required>
+                            <option value="">اختر الفئة...</option>
+                            <option value="عام">عام</option>
+                            <option value="افتتاح">افتتاح</option>
+                            <option value="عروض">عروض</option>
+                            <option value="فعاليات">فعاليات</option>
+                            <option value="تقنية">تقنية</option>
+                            <option value="إعلانات">إعلانات</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-content">محتوى الخبر *</label>
+                        <textarea id="news-content" name="content" required 
+                                  placeholder="أدخل تفاصيل الخبر..." rows="5"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-image">رابط الصورة *</label>
+                        <input type="text" id="news-image" name="image" required 
+                               placeholder="images/news-image.jpg">
+                        <small>مثال: images/news-image.jpg</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-status">حالة الخبر</label>
+                        <select id="news-status" name="status">
+                            <option value="active">نشط</option>
+                            <option value="archived">مؤرشف</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            💾 حفظ الخبر
+                        </button>
+                        <button type="button" class="btn-preview" onclick="previewNews()">
+                            👁️ معاينة
+                        </button>
+                        <button type="reset" class="btn-reset">
+                            🔄 إعادة تعيين
+                        </button>
+                        <button type="button" class="btn-test" onclick="testAndRefreshHome()">
+                            🔄 اختبار وإعادة تحميل الصفحة الرئيسية
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- رسائل النجاح والأخطاء -->
+                <div id="message-container"></div>
+                
+                <!-- معاينة الخبر -->
+                <div id="news-preview" class="news-preview hidden">
+                    <h3>معاينة الخبر</h3>
+                    <div id="preview-content"></div>
+                </div>
+            </section>
+
+            <!-- قسم إدارة الأخبار الموجودة -->
+            <section id="manage-news" class="admin-section">
+                <h2>إدارة الأخبار الموجودة</h2>
+                
+                <div class="search-controls">
+                    <input type="text" id="search-news" placeholder="البحث في الأخبار...">
+                    <select id="filter-category" title="فلترة حسب الفئة">
+                        <option value="">جميع الفئات</option>
+                        <option value="عام">عام</option>
+                        <option value="افتتاح">افتتاح</option>
+                        <option value="عروض">عروض</option>
+                        <option value="فعاليات">فعاليات</option>
+                        <option value="تقنية">تقنية</option>
+                        <option value="إعلانات">إعلانات</option>
+                    </select>
+                    <select id="filter-status" title="فلترة حسب الحالة">
+                        <option value="">جميع الحالات</option>
+                        <option value="active">نشط</option>
+                        <option value="archived">مؤرشف</option>
+                    </select>
+                </div>
+                
+                <div id="news-list" class="news-management-list">
+                    <!-- سيتم تحميل قائمة الأخبار هنا -->
+                </div>
+            </section>
+        </main>
+
+        <!-- الشريط الجانبي (Sidebar) -->
+        <aside>
+            <h3>إحصائيات</h3>
+            <ul>
+                <li>إجمالي الأخبار: <span id="total-news-count">0</span></li>
+                <li>الأخبار النشطة: <span id="active-news-count">0</span></li>
+                <li>الأخبار المؤرشفة: <span id="archived-news-count">0</span></li>
+            </ul>
+            
+            <h4>إجراءات سريعة</h4>
+            <ul>
+                <li><button type="button" onclick="exportNews()" class="action-btn">📤 تصدير الأخبار</button></li>
+                <li><button type="button" onclick="importNews()" class="action-btn">📥 استيراد الأخبار</button></li>
+                <li><button type="button" onclick="backupData()" class="action-btn">💾 نسخ احتياطي</button></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer>
+        <p>&copy; 2025 لوحة إدارة موقع أصيل. جميع الحقوق محفوظة.</p>
+        <p>
+            <a href="Aseel-home-01.html">العودة للموقع الرئيسي</a>
+        </p>
+    </footer>
+    
+    <!-- تحميل ملفات JavaScript -->
+    <script src="data/todayNews.js"></script>
+    <script src="JS/newsManager.js"></script>
+    <script src="JS/admin.js"></script>
+</body>
+</html>

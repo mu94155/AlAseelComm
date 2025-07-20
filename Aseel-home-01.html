@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألأصيل - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header>
+        <div class="header-content">
+            <h1>مجمع الأصيل التجاري</h1>
+            <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd">
+            <p>موقعنا هو بوابتك لكل ما يتعلق بمجمع الأصيل التجاري
+            <p>نعرض في هذا الموقع مايخص المشروع من أخبار وعروض</p>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar">
+            <a href="#home">الرئيسية</a>
+            <a href="#about">من نحن</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#news">الأخبار</a>
+            <a href="#offers">العروض</a>
+            <a href="#contact">اتصل بنا</a>
+            <a href="admin.html" class="admin-link">⚙️ إدارة الأخبار</a>
+    </nav>
+
+    <!-- المحتوى الرئيسي (Main Content) -->
+    <div class="container">
+        <main>
+            <!-- قسم الترحيب -->
+            <section id="home">
+                <h2>مرحبًا بكم في مجمع ألأصيل التجاري</h2>
+                <p>
+                    نحن نقدم أفضل الخدمات والحلول لعملائنا الكرام. موقع أصيل هو وجهتكم 
+                    المثالية للحصول على أحدث المعلومات والعروض الخاصة بمشروعنا.
+                </p>
+                
+                <article>
+                    <h3>رؤيتنا</h3>
+                    <p>
+                        نسعى لأن نكون الخيار الأول والأمثل لعملائنا من خلال تقديم خدمات 
+                        عالية الجودة وحلول مبتكرة تلبي احتياجاتهم وتفوق توقعاتهم.
+                    </p>
+                </article>
+
+                <article>
+                    <h3>مهمتنا</h3>
+                    <p>
+                        تقديم خدمات استثنائية وحلول متميزة للعملاء مع الحفاظ على أعلى 
+                        معايير الجودة والمهنية في جميع أعمالنا.
+                    </p>
+                </article>
+            </section>
+
+            <!-- قسم الأخبار -->
+            <section id="news">
+                <h2>آخر الأخبار</h2>
+                <!-- سيتم تحميل آخر 5 أخبار هنا بواسطة JavaScript -->
+                
+                <div class="archive-link">
+                    <a href="archive.html">عرض جميع الأخبار في الأرشيف</a>
+                </div>
+            </section>
+
+            <!-- قسم العروض -->
+            <section id="offers">
+                <h2>العروض الخاصة</h2>
+                <article>
+                    <h3>عرض الصيف المميز</h3>
+                    <p>خصم خاص بمناسبة فصل الصيف على جميع خدماتنا...</p>
+                    <strong>خصم يصل إلى 30%</strong>
+                </article>
+            </section>
+        </main>
+
+        <!-- الشريط الجانبي (Sidebar) -->
+        <aside>
+            <h3>معلومات مهمة</h3>
+            <ul>
+                <li>ساعات العمل: <span>من 8 صباحًا إلى 6 مساءً</span></li>
+                <li>رقم الهاتف: <span>123-456-7890</span></li>
+                <li>البريد الإلكتروني: <span>info@aseel.com</span></li>
+            </ul>
+            
+            <h4>روابط سريعة</h4>
+            <ul>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#support">الدعم الفني</a></li>
+                <li><a href="#faq">الأسئلة الشائعة</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer>
+        <p>&copy; 2025 موقع أصيل. جميع الحقوق محفوظة.</p>
+        <p>
+            <a href="#privacy">سياسة الخصوصية</a>
+            <a href="#terms">شروط الاستخدام</a>
+            <a href="#contact">اتصل بنا</a>
+        </p>
+    </footer>
+    
+    <!-- تحميل ملفات JavaScript -->
+    <script src="data/todayNews.js"></script>
+    <script src="JS/newsManager.js"></script>
+    <script src="JS/home-01.js"></script>
+    <script src="JS/debug.js"></script>
+</body>
+</html>

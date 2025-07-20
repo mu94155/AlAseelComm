@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أرشيف الأخبار - مجمع الأصيل التجاري</title>
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/archive.css">
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header>
+        <div class="header-content">
+            <h1>أرشيف أخبار مجمع الأصيل التجاري</h1>
+            <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd">
+            <p>جميع الأخبار والتحديثات المتعلقة بمجمع الأصيل التجاري</p>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar">
+            <a href="Aseel-home-01.html">الرئيسية</a>
+            <a href="Aseel-home-01.html#about">من نحن</a>
+            <a href="Aseel-home-01.html#services">خدماتنا</a>
+            <a href="Aseel-home-01.html#news">الأخبار</a>
+            <a href="Aseel-home-01.html#offers">العروض</a>
+            <a href="Aseel-home-01.html#contact">اتصل بنا</a>
+    </nav>
+
+    <!-- المحتوى الرئيسي (Main Content) -->
+    <div class="container archive-container">
+        <main>
+            <!-- عنوان الأرشيف -->
+            <section class="archive-header">
+                <h2>أرشيف جميع الأخبار</h2>
+                <p>تصفح جميع الأخبار والتحديثات مرتبة من الأحدث إلى الأقدم</p>
+                <a href="Aseel-home-01.html" class="back-link">← العودة للصفحة الرئيسية</a>
+            </section>
+
+            <!-- قسم الأرشيف -->
+            <section id="archive-news">
+                <!-- سيتم تحميل جميع الأخبار هنا بواسطة JavaScript -->
+            </section>
+        </main>
+
+        <!-- الشريط الجانبي (Sidebar) -->
+        <aside>
+            <h3>إحصائيات الأرشيف</h3>
+            <ul>
+                <li>إجمالي الأخبار: <span id="total-news">0</span></li>
+                <li>آخر تحديث: <span id="last-update">-</span></li>
+            </ul>
+            
+            <h4>روابط سريعة</h4>
+            <ul>
+                <li><a href="Aseel-home-01.html#services">خدماتنا</a></li>
+                <li><a href="Aseel-home-01.html#offers">العروض</a></li>
+                <li><a href="Aseel-home-01.html#contact">اتصل بنا</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer>
+        <p>&copy; 2025 موقع أصيل. جميع الحقوق محفوظة.</p>
+        <p>
+            <a href="#privacy">سياسة الخصوصية</a>
+            <a href="#terms">شروط الاستخدام</a>
+            <a href="#contact">اتصل بنا</a>
+        </p>
+    </footer>
+    
+    <!-- تحميل ملفات JavaScript -->
+    <script src="data/todayNews.js"></script>
+    <script src="JS/newsManager.js"></script>
+    <script src="JS/archive.js"></script>
+</body>
+</html>
