@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألأصيل - مصاريف المشروع وجدولة المدفوعات</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/bootstrap-rtl-custom.css">
+    <style>
+        .expense-card {
+            border-left: 4px solid #007bff;
+            transition: all 0.3s ease;
+        }
+        .expense-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .milestone-badge {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+        .payment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .status-paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .expense-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .progress-custom {
+            height: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header class="bg-primary text-white">
+        <div class="container">
+            <div class="header-content text-center py-4">
+                <h1 class="display-5 mb-3">مصاريف المشروع وجدولة المدفوعات</h1>
+                <p class="lead">إدارة شاملة لمصاريف مجمع الأصيل التجاري ومراحل المشروع</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="Aseel-home-01.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#expenses">المصاريف</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#milestones">المراحل</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#payments">المدفوعات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reports">التقارير</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container my-5">
+        <!-- ملخص المشروع -->
+        <div class="expense-summary text-center">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="h4">إجمالي الميزانية</h3>
+                    <p class="h2 mb-0">2,500,000 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">المبلغ المنفق</h3>
+                    <p class="h2 mb-0">1,750,000 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">المبلغ المتبقي</h3>
+                    <p class="h2 mb-0">750,000 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">نسبة الإنجاز</h3>
+                    <p class="h2 mb-0">70%</p>
+                </div>
+            </div>
+            <div class="progress progress-custom mt-3">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        <!-- المراحل والمدفوعات -->
+        <section id="milestones" class="mb-5">
+            <h2 class="h3 mb-4 text-center">مراحل المشروع والمدفوعات المجدولة</h2>
+            
+            <!-- المرحلة الأولى -->
+            <div class="card expense-card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="h5 mb-0">المرحلة الأولى: الأساسات والهيكل</h3>
+                        <span class="milestone-badge">مكتمل</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="h6 mb-3">تفاصيل المصاريف:</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الحفريات وأعمال الأساسات</span>
+                                    <strong>350,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الخرسانة والحديد</span>
+                                    <strong>280,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>رواتب العمال والمهندسين</span>
+                                    <strong>120,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>معدات وآلات البناء</span>
+                                    <strong>50,000 ر.ع</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h4 class="h6">إجمالي المرحلة</h4>
+                                <p class="h4 text-primary">800,000 ر.ع</p>
+                                <span class="payment-status status-paid">تم الدفع</span>
+                                <p class="mt-2 small text-muted">تاريخ الدفع: 15 مارس 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المرحلة الثانية -->
+            <div class="card expense-card mb-4">
+                <div class="card-header bg-info text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="h5 mb-0">المرحلة الثانية: البناء والتشطيبات الأساسية</h3>
+                        <span class="milestone-badge" style="background: linear-gradient(45deg, #17a2b8, #117a8b);">قيد التنفيذ</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="h6 mb-3">تفاصيل المصاريف:</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>البناء والجدران</span>
+                                    <strong>400,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>السقف والعزل</span>
+                                    <strong>200,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الأعمال الكهربائية الأساسية</span>
+                                    <strong>150,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>السباكة والصرف الصحي</span>
+                                    <strong>100,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>رواتب الشهر الثاني والثالث</span>
+                                    <strong>100,000 ر.ع</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h4 class="h6">إجمالي المرحلة</h4>
+                                <p class="h4 text-info">950,000 ر.ع</p>
+                                <span class="payment-status status-pending">قيد المراجعة</span>
+                                <p class="mt-2 small text-muted">الدفع المتوقع: 30 يوليو 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المرحلة الثالثة -->
+            <div class="card expense-card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="h5 mb-0">المرحلة الثالثة: التشطيبات النهائية والتجهيزات</h3>
+                        <span class="milestone-badge" style="background: linear-gradient(45deg, #ffc107, #e0a800);">مجدول</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="h6 mb-3">تفاصيل المصاريف المتوقعة:</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الدهانات والديكورات</span>
+                                    <strong>180,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>البلاط والأرضيات</span>
+                                    <strong>220,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>النوافذ والأبواب</span>
+                                    <strong>120,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>أنظمة التكييف والتهوية</span>
+                                    <strong>150,000 ر.ع</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>اللمسات الأخيرة والتنظيف</span>
+                                    <strong>80,000 ر.ع</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h4 class="h6">إجمالي المرحلة</h4>
+                                <p class="h4 text-warning">750,000 ر.ع</p>
+                                <span class="payment-status status-pending">مجدول</span>
+                                <p class="mt-2 small text-muted">الدفع المتوقع: 15 أكتوبر 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المصاريف الشهرية -->
+        <section id="expenses" class="mb-5">
+            <h2 class="h3 mb-4 text-center">المصاريف الشهرية المتكررة</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="h6 mb-0">الرواتب والأجور</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>مهندس المشروع</span>
+                                    <strong>15,000 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>رئيس العمال</span>
+                                    <strong>8,000 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>العمال (8 أشخاص)</span>
+                                    <strong>32,000 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>حارس الموقع</span>
+                                    <strong>5,000 ر.ع/شهر</strong>
+                                </li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <strong class="text-success">المجموع: 60,000 ر.ع/شهر</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-danger text-white">
+                            <h3 class="h6 mb-0">المرافق والصيانة</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الكهرباء</span>
+                                    <strong>3,500 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>المياه</span>
+                                    <strong>2,000 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>صيانة المعدات</span>
+                                    <strong>5,000 ر.ع/شهر</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>الأمن والحراسة</span>
+                                    <strong>4,000 ر.ع/شهر</strong>
+                                </li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <strong class="text-danger">المجموع: 14,500 ر.ع/شهر</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- جدول المدفوعات القادمة -->
+        <section id="payments" class="mb-5">
+            <h2 class="h3 mb-4 text-center">جدول المدفوعات القادمة</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>التاريخ المحدد</th>
+                            <th>نوع المدفوع</th>
+                            <th>المرحلة/الفئة</th>
+                            <th>المبلغ</th>
+                            <th>الحالة</th>
+                            <th>الملاحظات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>30 يوليو 2025</td>
+                            <td>دفعة مرحلية</td>
+                            <td>المرحلة الثانية</td>
+                            <td>950,000 ر.ع</td>
+                            <td><span class="payment-status status-pending">معلق</span></td>
+                            <td>في انتظار الفحص النهائي</td>
+                        </tr>
+                        <tr>
+                            <td>31 يوليو 2025</td>
+                            <td>رواتب شهرية</td>
+                            <td>الرواتب والأجور</td>
+                            <td>60,000 ر.ع</td>
+                            <td><span class="payment-status status-pending">مجدول</span></td>
+                            <td>راتب شهر يوليو</td>
+                        </tr>
+                        <tr>
+                            <td>31 يوليو 2025</td>
+                            <td>فواتير المرافق</td>
+                            <td>المرافق والصيانة</td>
+                            <td>14,500 ر.ع</td>
+                            <td><span class="payment-status status-pending">مجدول</span></td>
+                            <td>كهرباء، مياه، صيانة</td>
+                        </tr>
+                        <tr>
+                            <td>15 أغسطس 2025</td>
+                            <td>صيانة طارئة</td>
+                            <td>الصيانة</td>
+                            <td>25,000 ر.ع</td>
+                            <td><span class="payment-status status-overdue">متأخر</span></td>
+                            <td>إصلاح الرافعة</td>
+                        </tr>
+                        <tr>
+                            <td>31 أغسطس 2025</td>
+                            <td>رواتب شهرية</td>
+                            <td>الرواتب والأجور</td>
+                            <td>60,000 ر.ع</td>
+                            <td><span class="payment-status status-pending">مجدول</span></td>
+                            <td>راتب شهر أغسطس</td>
+                        </tr>
+                        <tr>
+                            <td>15 أكتوبر 2025</td>
+                            <td>دفعة مرحلية</td>
+                            <td>المرحلة الثالثة</td>
+                            <td>750,000 ر.ع</td>
+                            <td><span class="payment-status status-pending">مجدول</span></td>
+                            <td>التشطيبات النهائية</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- نماذج إدخال المصاريف والمدفوعات -->
+        <section id="forms-section" class="mb-5">
+            <div class="row">
+                <!-- نموذج إضافة مصروف جديد -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h5 mb-0">➕ إضافة مصروف جديد</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="expenseForm">
+                                <div class="mb-3">
+                                    <label for="expenseDescription" class="form-label">وصف المصروف</label>
+                                    <input type="text" class="form-control" id="expenseDescription" placeholder="مثل: مواد البناء، رواتب العمال، الكهرباء" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseAmount" class="form-label">المبلغ (ر.ع)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="expenseAmount" placeholder="0.00" min="0" step="0.01" required>
+                                        <span class="input-group-text">ر.ع</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseCategory" class="form-label">فئة المصروف</label>
+                                    <select class="form-select" id="expenseCategory" required>
+                                        <option value="">اختر الفئة</option>
+                                        <option value="construction">أعمال البناء</option>
+                                        <option value="materials">مواد البناء</option>
+                                        <option value="salaries">الرواتب والأجور</option>
+                                        <option value="utilities">المرافق والكهرباء</option>
+                                        <option value="maintenance">الصيانة</option>
+                                        <option value="equipment">المعدات والآلات</option>
+                                        <option value="other">أخرى</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseDate" class="form-label">تاريخ المصروف</label>
+                                    <input type="date" class="form-control" id="expenseDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseNotes" class="form-label">ملاحظات إضافية</label>
+                                    <textarea class="form-control" id="expenseNotes" rows="3" placeholder="أي ملاحظات أو تفاصيل إضافية..."></textarea>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">💾 حفظ المصروف</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- نموذج جدولة دفعة مرحلية جديدة -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h3 class="h5 mb-0">📅 جدولة دفعة مرحلية جديدة</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="milestoneForm">
+                                <div class="mb-3">
+                                    <label for="milestoneTitle" class="form-label">عنوان المرحلة</label>
+                                    <input type="text" class="form-control" id="milestoneTitle" placeholder="مثل: المرحلة الرابعة - أعمال التشطيب النهائية" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneAmount" class="form-label">مبلغ الدفعة (ر.ع)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="milestoneAmount" placeholder="0.00" min="0" step="0.01" required>
+                                        <span class="input-group-text">ر.ع</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneDate" class="form-label">تاريخ الدفعة المتوقع</label>
+                                    <input type="date" class="form-control" id="milestoneDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneStatus" class="form-label">حالة المرحلة</label>
+                                    <select class="form-select" id="milestoneStatus" required>
+                                        <option value="">اختر الحالة</option>
+                                        <option value="scheduled">مجدولة</option>
+                                        <option value="in-progress">قيد التنفيذ</option>
+                                        <option value="completed">مكتملة</option>
+                                        <option value="pending">في انتظار الموافقة</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneContractor" class="form-label">المقاول/المورد</label>
+                                    <input type="text" class="form-control" id="milestoneContractor" placeholder="اسم الشركة أو المقاول المسؤول">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneDescription" class="form-label">وصف أعمال المرحلة</label>
+                                    <textarea class="form-control" id="milestoneDescription" rows="3" placeholder="تفاصيل الأعمال المطلوب إنجازها في هذه المرحلة..." required></textarea>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-info">📋 جدولة المرحلة</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الإجراءات السريعة -->
+        <section class="text-center">
+            <h2 class="h3 mb-4">الإجراءات السريعة</h2>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-primary btn-lg w-100" onclick="scrollToSection('forms-section')">
+                        <i class="bi bi-plus-circle"></i><br>
+                        إضافة مصروف جديد
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-info btn-lg w-100" onclick="scrollToSection('forms-section')">
+                        <i class="bi bi-calendar-check"></i><br>
+                        جدولة دفعة
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-success btn-lg w-100" onclick="exportReport()">
+                        <i class="bi bi-file-earmark-excel"></i><br>
+                        تصدير التقرير
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-warning btn-lg w-100" onclick="openBudgetSettings()">
+                        <i class="bi bi-gear"></i><br>
+                        إعدادات الميزانية
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="text-center">
+                <p class="mb-2">&copy; 2025 مجمع ألأصيل التجاري - نظام إدارة المصاريف والمدفوعات</p>
+                <p class="small text-muted">آخر تحديث: 21 يوليو 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // إضافة بعض التفاعل للصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث التواريخ بشكل تلقائي
+            const statusElements = document.querySelectorAll('.payment-status');
+            
+            statusElements.forEach(element => {
+                if (element.textContent.includes('متأخر')) {
+                    element.parentElement.parentElement.style.backgroundColor = '#fff5f5';
+                }
+            });
+            
+            // إضافة تأثيرات على الكروت
+            const cards = document.querySelectorAll('.expense-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // تعيين التاريخ الحالي كقيمة افتراضية
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('expenseDate').value = today;
+            
+            // التعامل مع نموذج المصروف
+            document.getElementById('expenseForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewExpense();
+            });
+            
+            // التعامل مع نموذج المرحلة
+            document.getElementById('milestoneForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewMilestone();
+            });
+        });
+
+        // إضافة مصروف جديد
+        function addNewExpense() {
+            const description = document.getElementById('expenseDescription').value;
+            const amount = document.getElementById('expenseAmount').value;
+            const category = document.getElementById('expenseCategory').value;
+            const date = document.getElementById('expenseDate').value;
+            const notes = document.getElementById('expenseNotes').value;
+
+            if (!description || !amount || !category || !date) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            // هنا يمكن إضافة كود لحفظ البيانات في قاعدة البيانات
+            alert(`تم إضافة المصروف بنجاح:\nالوصف: ${description}\nالمبلغ: ${amount} ر.ع\nالفئة: ${getCategoryName(category)}\nالتاريخ: ${date}`);
+            
+            // إعادة تعيين النموذج
+            document.getElementById('expenseForm').reset();
+            document.getElementById('expenseDate').value = new Date().toISOString().split('T')[0];
+        }
+
+        // إضافة مرحلة جديدة
+        function addNewMilestone() {
+            const title = document.getElementById('milestoneTitle').value;
+            const amount = document.getElementById('milestoneAmount').value;
+            const date = document.getElementById('milestoneDate').value;
+            const status = document.getElementById('milestoneStatus').value;
+            const contractor = document.getElementById('milestoneContractor').value;
+            const description = document.getElementById('milestoneDescription').value;
+
+            if (!title || !amount || !date || !status || !description) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            // هنا يمكن إضافة كود لحفظ البيانات في قاعدة البيانات
+            alert(`تم جدولة المرحلة بنجاح:\nالعنوان: ${title}\nالمبلغ: ${amount} ر.ع\nالتاريخ: ${date}\nالحالة: ${getStatusName(status)}`);
+            
+            // إعادة تعيين النموذج
+            document.getElementById('milestoneForm').reset();
+        }
+
+        // التمرير إلى قسم معين
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // تصدير التقرير
+        function exportReport() {
+            alert('سيتم تصدير التقرير إلى ملف Excel');
+            // هنا يمكن إضافة كود تصدير البيانات
+        }
+
+        // فتح إعدادات الميزانية
+        function openBudgetSettings() {
+            alert('فتح إعدادات الميزانية');
+            // هنا يمكن إضافة نافذة منبثقة أو توجيه لصفحة الإعدادات
+        }
+
+        // الحصول على اسم الفئة بالعربية
+        function getCategoryName(category) {
+            const categories = {
+                'construction': 'أعمال البناء',
+                'materials': 'مواد البناء',
+                'salaries': 'الرواتب والأجور',
+                'utilities': 'المرافق والكهرباء',
+                'maintenance': 'الصيانة',
+                'equipment': 'المعدات والآلات',
+                'other': 'أخرى'
+            };
+            return categories[category] || category;
+        }
+
+        // الحصول على اسم الحالة بالعربية
+        function getStatusName(status) {
+            const statuses = {
+                'scheduled': 'مجدولة',
+                'in-progress': 'قيد التنفيذ',
+                'completed': 'مكتملة',
+                'pending': 'في انتظار الموافقة'
+            };
+            return statuses[status] || status;
+        }
+    </script>
+</body>
+</html>
