@@ -55,8 +55,6 @@ class CustomersManager {
                 depositAmount: 16000,
                 phone: '0501234567',
                 email: 'ahmed@restaurant.com',
-                emergencyContact: 'محمد الأحمد',
-                emergencyPhone: '0551234567',
                 startDate: '2024-01-15',
                 contractDuration: 12,
                 contractLink: 'https://drive.google.com/contract1',
@@ -75,8 +73,6 @@ class CustomersManager {
                 depositAmount: 9000,
                 phone: '0512345678',
                 email: 'fatima@fashion.com',
-                emergencyContact: 'علي السالم',
-                emergencyPhone: '0562345678',
                 startDate: '2024-03-01',
                 contractDuration: 24,
                 contractLink: 'https://drive.google.com/contract2',
@@ -226,8 +222,6 @@ class CustomersManager {
         document.getElementById('deposit-amount').value = customer.depositAmount || '';
         document.getElementById('customer-phone').value = customer.phone;
         document.getElementById('customer-email').value = customer.email || '';
-        document.getElementById('emergency-contact').value = customer.emergencyContact || '';
-        document.getElementById('emergency-phone').value = customer.emergencyPhone || '';
         document.getElementById('start-date').value = customer.startDate;
         document.getElementById('contract-duration').value = customer.contractDuration || 12;
         document.getElementById('contract-link').value = customer.contractLink || '';
@@ -296,14 +290,6 @@ class CustomersManager {
                         <div class="detail-item">
                             <span class="detail-label">البريد الإلكتروني:</span>
                             <span class="detail-value">${customer.email ? `<a href="mailto:${customer.email}">${customer.email}</a>` : 'غير محدد'}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">جهة اتصال الطوارئ:</span>
-                            <span class="detail-value">${customer.emergencyContact || 'غير محدد'}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">هاتف الطوارئ:</span>
-                            <span class="detail-value">${customer.emergencyPhone ? `<a href="tel:${customer.emergencyPhone}">${customer.emergencyPhone}</a>` : 'غير محدد'}</span>
                         </div>
                     </div>
 
@@ -378,8 +364,6 @@ class CustomersManager {
             depositAmount: parseFloat(document.getElementById('deposit-amount').value) || 0,
             phone: document.getElementById('customer-phone').value.trim(),
             email: document.getElementById('customer-email').value.trim(),
-            emergencyContact: document.getElementById('emergency-contact').value.trim(),
-            emergencyPhone: document.getElementById('emergency-phone').value.trim(),
             startDate: document.getElementById('start-date').value,
             contractDuration: parseInt(document.getElementById('contract-duration').value) || 12,
             contractLink: document.getElementById('contract-link').value.trim(),
