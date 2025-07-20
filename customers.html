@@ -21,6 +21,15 @@
             padding: 0;
             direction: rtl;
         }
+
+        /* إخفاء العناصر البصرية للقراءة فقط بواسطة قارئ الشاشة */
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
         
         /* تحسين توسيط المحتوى */
         .toolbar,
@@ -76,16 +85,11 @@
                     <button id="add-customer-btn" class="btn-primary">➕ إضافة عميل جديد</button>
                     <button id="export-customers-btn" class="btn-secondary">📄 تصدير البيانات</button>
                     <button id="import-customers-btn" class="btn-secondary">📁 استيراد البيانات</button>
-                    <input type="file" id="import-file" accept=".json" class="hidden-file-input">
+                    <input type="file" id="import-file-input" class="hidden-file-input" accept=".csv,.xlsx,.json">
                 </div>
-            </div>
-
-            <!-- شريط البحث والفلترة -->
-            <div class="search-filter-bar">
-                <div class="search-box">
-                    <input type="text" id="search-customers" placeholder="🔍 البحث عن عميل (الاسم، نوع النشاط، رقم المحل...)">
-                </div>
+                
                 <div class="filter-options">
+                    <label for="business-type-filter" class="visually-hidden">تصفية حسب نوع النشاط</label>
                     <select id="business-type-filter">
                         <option value="">جميع أنواع الأنشطة</option>
                         <option value="مطعم">مطعم</option>
@@ -96,6 +100,7 @@
                         <option value="محل تجميل">محل تجميل</option>
                         <option value="أخرى">أخرى</option>
                     </select>
+                    <label for="payment-status-filter" class="visually-hidden">تصفية حسب حالة الدفع</label>
                     <select id="payment-status-filter">
                         <option value="">جميع حالات الدفع</option>
                         <option value="مدفوع">مدفوع</option>
@@ -151,7 +156,7 @@
 
     <!-- نموذج إضافة/تعديل العميل -->
     <div id="customer-modal" class="modal">
-        <div class="modal-overlay" onclick="customersManager.closeModal()"></div>
+        <button class="modal-overlay" type="button" aria-label="إغلاق النافذة" title="إغلاق النافذة" onclick="customersManager.closeModal()" onkeydown="if(event.key==='Enter'||event.key===' '){customersManager.closeModal();}"></button>
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-title">➕ إضافة عميل جديد</h3>
@@ -270,7 +275,7 @@
 
     <!-- نموذج عرض تفاصيل العميل -->
     <div id="customer-details-modal" class="modal">
-        <div class="modal-overlay" onclick="customersManager.closeDetailsModal()"></div>
+        <button class="modal-overlay" type="button" title="إغلاق النافذة" aria-label="إغلاق النافذة" onclick="customersManager.closeDetailsModal()" onkeydown="if(event.key==='Enter'||event.key===' '){customersManager.closeDetailsModal();}"></button>
         <div class="modal-content">
             <div class="modal-header">
                 <h3>👤 تفاصيل العميل</h3>
