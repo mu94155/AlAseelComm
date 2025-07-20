@@ -7,8 +7,46 @@
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/customers.css">
     <style>
-        .admin-panel {
+        /* تحسين التوسيط والتخطيط */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        
+        /* تحسين توسيط المحتوى */
+        .toolbar,
+        .search-filter-bar,
+        .stats-cards,
+        .customers-table-container {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* إخفاء ملف الاستيراد */
+        .hidden-file-input {
             display: none;
+        }
+        
+        /* تحسين التصميم المتجاوب */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
         }
     </style>
 </head>
@@ -38,7 +76,7 @@
                     <button id="add-customer-btn" class="btn-primary">➕ إضافة عميل جديد</button>
                     <button id="export-customers-btn" class="btn-secondary">📄 تصدير البيانات</button>
                     <button id="import-customers-btn" class="btn-secondary">📁 استيراد البيانات</button>
-                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                    <input type="file" id="import-file" accept=".json" class="hidden-file-input">
                 </div>
             </div>
 
