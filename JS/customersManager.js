@@ -88,15 +88,35 @@ class CustomersManager {
         document.getElementById('add-customer-btn').addEventListener('click', () => this.openAddModal());
         document.getElementById('export-customers-btn').addEventListener('click', () => this.exportData());
         document.getElementById('import-customers-btn').addEventListener('click', () => this.openImportDialog());
-        document.getElementById('import-file').addEventListener('change', (e) => this.importData(e));
+        document.getElementById('import-file-input').addEventListener('change', (e) => this.importData(e));
 
         // البحث والفلترة
-        document.getElementById('search-customers').addEventListener('input', (e) => this.filterCustomers());
         document.getElementById('business-type-filter').addEventListener('change', () => this.filterCustomers());
         document.getElementById('payment-status-filter').addEventListener('change', () => this.filterCustomers());
 
         // نموذج العميل
         document.getElementById('customer-form').addEventListener('submit', (e) => this.saveCustomer(e));
+        document.getElementById('cancel-customer-btn').addEventListener('click', () => this.closeModal());
+        document.getElementById('close-modal-btn').addEventListener('click', () => this.closeModal());
+        document.getElementById('close-details-modal-btn').addEventListener('click', () => this.closeDetailsModal());
+        
+        // إغلاق النوافذ بالضغط على الخلفية
+        document.getElementById('modal-overlay-btn').addEventListener('click', () => this.closeModal());
+        document.getElementById('details-modal-overlay-btn').addEventListener('click', () => this.closeDetailsModal());
+        
+        // دعم لوحة المفاتيح للنوافذ المنبثقة
+        document.getElementById('modal-overlay-btn').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.closeModal();
+            }
+        });
+        document.getElementById('details-modal-overlay-btn').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.closeDetailsModal();
+            }
+        });
 
         // إغلاق النوافذ المنبثقة بالضغط على Escape
         document.addEventListener('keydown', (e) => {

@@ -156,11 +156,11 @@
 
     <!-- نموذج إضافة/تعديل العميل -->
     <div id="customer-modal" class="modal">
-        <button class="modal-overlay" type="button" aria-label="إغلاق النافذة" title="إغلاق النافذة" onclick="customersManager.closeModal()" onkeydown="if(event.key==='Enter'||event.key===' '){customersManager.closeModal();}"></button>
+        <button class="modal-overlay" type="button" aria-label="إغلاق النافذة" title="إغلاق النافذة" id="modal-overlay-btn"></button>
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-title">➕ إضافة عميل جديد</h3>
-                <button class="close-btn" onclick="customersManager.closeModal()">✖</button>
+                <button class="close-btn" id="close-modal-btn">✖</button>
             </div>
             
             <form id="customer-form">
@@ -267,7 +267,7 @@
 
                 <div class="form-actions">
                     <button type="submit" id="save-customer-btn" class="btn-primary">💾 حفظ العميل</button>
-                    <button type="button" onclick="customersManager.closeModal()" class="btn-secondary">❌ إلغاء</button>
+                    <button type="button" id="cancel-customer-btn" class="btn-secondary">❌ إلغاء</button>
                 </div>
             </form>
         </div>
@@ -275,11 +275,11 @@
 
     <!-- نموذج عرض تفاصيل العميل -->
     <div id="customer-details-modal" class="modal">
-        <button class="modal-overlay" type="button" title="إغلاق النافذة" aria-label="إغلاق النافذة" onclick="customersManager.closeDetailsModal()" onkeydown="if(event.key==='Enter'||event.key===' '){customersManager.closeDetailsModal();}"></button>
+        <button class="modal-overlay" type="button" title="إغلاق النافذة" aria-label="إغلاق النافذة" id="details-modal-overlay-btn"></button>
         <div class="modal-content">
             <div class="modal-header">
                 <h3>👤 تفاصيل العميل</h3>
-                <button class="close-btn" onclick="customersManager.closeDetailsModal()">✖</button>
+                <button class="close-btn" id="close-details-modal-btn">✖</button>
             </div>
             <div id="customer-details-content">
                 <!-- سيتم ملؤها بواسطة JavaScript -->
