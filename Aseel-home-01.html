@@ -4,110 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ألأصيل - الصفحة الرئيسية</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS (load after Bootstrap to override styles) -->
     <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/archive.css">
+    <link rel="stylesheet" href="styles/bootstrap-rtl-custom.css">
 </head>
 <body>
     <!-- رأس الصفحة (Header) -->
-    <header>
-        <div class="header-content">
-            <h1>مجمع الأصيل التجاري</h1>
-            <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd">
-            <p>موقعنا هو بوابتك لكل ما يتعلق بمجمع الأصيل التجاري
-            <p>نعرض في هذا الموقع مايخص المشروع من أخبار وعروض</p>
+    <header class="bg-primary text-white">
+        <div class="container">
+            <div class="header-content text-center py-4">
+                <h1 class="display-4 mb-3">مجمع الأصيل التجاري</h1>
+                <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd img-fluid rounded">
+                <p class="lead">موقعنا هو بوابتك لكل ما يتعلق بمجمع الأصيل التجاري</p>
+                <p>نعرض في هذا الموقع مايخص المشروع من أخبار وعروض</p>
+            </div>
         </div>
     </header>
 
     <!-- شريط التنقل (Navigation) -->
-    <nav class="navbar">
-            <a href="#home">الرئيسية</a>
-            <a href="#about">من نحن</a>
-            <a href="#services">خدماتنا</a>
-            <a href="#news">الأخبار</a>
-            <a href="#offers">العروض</a>
-            <a href="#contact">اتصل بنا</a>
-            <a href="admin.html" class="admin-link">⚙️ إدارة الأخبار</a>
-            <a href="customers.html" class="admin-link">👥 إدارة العملاء</a>
-            <a href="archive.html" class="admin-link">📂 الأرشيف</a>
-            <a href="backup-manager.html" class="admin-link">💾 النسخ الاحتياطية</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">خدماتنا</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">الأخبار</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#offers">العروض</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link admin-link" href="admin.html">⚙️ إدارة الأخبار</a></li>
+                    <li class="nav-item"><a class="nav-link admin-link" href="customers.html">👥 إدارة العملاء</a></li>
+                    <li class="nav-item"><a class="nav-link admin-link" href="archive.html">📂 الأرشيف</a></li>
+                    <li class="nav-item"><a class="nav-link admin-link" href="backup-manager.html">💾 النسخ الاحتياطية</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <!-- المحتوى الرئيسي (Main Content) -->
-    <div class="container">
-        <main>
-            <!-- قسم الترحيب -->
-            <section id="home">
-                <h2>مرحبًا بكم في مجمع ألأصيل التجاري</h2>
-                <p>
-                    نحن نقدم أفضل الخدمات والحلول لعملائنا الكرام. موقع أصيل هو وجهتكم 
-                    المثالية للحصول على أحدث المعلومات والعروض الخاصة بمشروعنا.
-                </p>
-                
-                <article>
-                    <h3>رؤيتنا</h3>
-                    <p>
-                        نسعى لأن نكون الخيار الأول والأمثل لعملائنا من خلال تقديم خدمات 
-                        عالية الجودة وحلول مبتكرة تلبي احتياجاتهم وتفوق توقعاتهم.
+    <div class="home-content-wrapper">
+        <div class="home-container">
+            <main class="home-main">
+                <!-- قسم الترحيب -->
+                <section id="home" class="mb-5">
+                    <h2 class="h3 mb-3 text-center">مرحبًا بكم في مجمع ألأصيل التجاري</h2>
+                    <p class="lead">
+                        نحن نقدم أفضل العروض لزبائننا الكرام. موقع ألأصيل هو وجهتكم 
+                        المثالية للحصول على أحدث المعلومات والعروض الخاصة بمشروعنا.
                     </p>
-                </article>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <article class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title h5">رؤيتنا</h3>
+                                    <p class="card-text">
+                                        نسعى لأن نكون الخيار الأول والأمثل لعملائنا من خلال تقديم خيارات متنوعة تلبي احتياجاتهم وتوقعاتهم.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title h5">مهمتنا</h3>
+                                    <p class="card-text">
+                                        تقديم خدمات متميزة للعملاء مع الحفاظ على أعلى 
+                                        معايير الجودة والمهنية في جميع أعمالنا.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
 
-                <article>
-                    <h3>مهمتنا</h3>
-                    <p>
-                        تقديم خدمات استثنائية وحلول متميزة للعملاء مع الحفاظ على أعلى 
-                        معايير الجودة والمهنية في جميع أعمالنا.
-                    </p>
-                </article>
-            </section>
+                <!-- قسم الأخبار -->
+                <section id="news" class="mb-5">
+                    <h2 class="h3 mb-3 text-center">آخر الأخبار</h2>
+                    <!-- سيتم تحميل آخر 5 أخبار هنا بواسطة JavaScript -->
+                    
+                    <div class="archive-link text-center mt-3">
+                        <a href="archive.html" class="btn btn-outline-primary">عرض جميع الأخبار في الأرشيف</a>
+                    </div>
+                </section>
 
-            <!-- قسم الأخبار -->
-            <section id="news">
-                <h2>آخر الأخبار</h2>
-                <!-- سيتم تحميل آخر 5 أخبار هنا بواسطة JavaScript -->
-                
-                <div class="archive-link">
-                    <a href="archive.html">عرض جميع الأخبار في الأرشيف</a>
+                <!-- قسم العروض -->
+                <section id="offers" class="mb-5">
+                    <h2 class="h3 mb-3 text-center">العروض الخاصة</h2>
+                    <article class="card">
+                        <div class="card-body">
+                            <h3 class="card-title h5">عرض الصيف المميز</h3>
+                            <p class="card-text">خصم خاص بمناسبةمهرجان خريف ظفار على جميع خدماتنا...</p>
+                            <p class="card-text"><strong class="text-success">خصم يصل إلى 20%</strong></p>
+                        </div>
+                    </article>
+                </section>
+            </main>
+
+            <!-- الشريط الجانبي (Sidebar) -->
+            <aside class="home-sidebar">
+                <div class="card mb-4">
+                    <div class="card-header text-center">
+                        <h3 class="h5 mb-0">معلومات مهمة</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">ساعات العمل: <span class="fw-bold">من 8 صباحًا إلى 6 مساءً</span></li>
+                            <li class="mb-2">رقم الهاتف: <span class="fw-bold">99869416</span></li>
+                            <li class="mb-2">البريد الإلكتروني: <span class="fw-bold">info@aseelcc.com</span></li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
-
-            <!-- قسم العروض -->
-            <section id="offers">
-                <h2>العروض الخاصة</h2>
-                <article>
-                    <h3>عرض الصيف المميز</h3>
-                    <p>خصم خاص بمناسبة فصل الصيف على جميع خدماتنا...</p>
-                    <strong>خصم يصل إلى 30%</strong>
-                </article>
-            </section>
-        </main>
-
-        <!-- الشريط الجانبي (Sidebar) -->
-        <aside>
-            <h3>معلومات مهمة</h3>
-            <ul>
-                <li>ساعات العمل: <span>من 8 صباحًا إلى 6 مساءً</span></li>
-                <li>رقم الهاتف: <span>123-456-7890</span></li>
-                <li>البريد الإلكتروني: <span>info@aseel.com</span></li>
-            </ul>
-            
-            <h4>روابط سريعة</h4>
-            <ul>
-                <li><a href="#services">خدماتنا</a></li>
-                <li><a href="#support">الدعم الفني</a></li>
-                <li><a href="#faq">الأسئلة الشائعة</a></li>
-            </ul>
-        </aside>
+                
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="h6 mb-0">روابط سريعة</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#services" class="text-decoration-none">خدماتنا</a></li>
+                            <li class="mb-2"><a href="#support" class="text-decoration-none">الدعم الفني</a></li>
+                            <li class="mb-2"><a href="#faq" class="text-decoration-none">الأسئلة الشائعة</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
     </div>
 
     <!-- تذييل الصفحة (Footer) -->
-    <footer>
-        <p>&copy; 2025 موقع أصيل. جميع الحقوق محفوظة.</p>
-        <p>
-            <a href="#privacy">سياسة الخصوصية</a>
-            <a href="#terms">شروط الاستخدام</a>
-            <a href="#contact">اتصل بنا</a>
-        </p>
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="text-center">
+                <p class="mb-2">&copy; 2025 موقع مجمع ألأصيل التجاري . جميع الحقوق محفوظة.</p>
+                <div class="footer-links">
+                    <a href="#privacy" class="text-white-50 text-decoration-none me-3">سياسة الخصوصية</a>
+                    <a href="#terms" class="text-white-50 text-decoration-none me-3">شروط الاستخدام</a>
+                    <a href="#contact" class="text-white-50 text-decoration-none">اتصل بنا</a>
+                </div>
+            </div>
+        </div>
     </footer>
     
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- تحميل ملفات JavaScript -->
     <script src="data/todayNews.js"></script>
     <script src="JS/newsManager.js"></script>

@@ -5,9 +5,11 @@ font-family: Arial, sans-serif;
 line-height: 1.6;
 }
 header {
-background-color: #6a56b4;
+background: linear-gradient(135deg, #6a56b4, #87558e);
 color: white;
-padding: 1rem;
+padding: 2rem;
+border-radius: 12px;
+margin-bottom: 2rem;
 text-align: center;
 }
 
@@ -25,7 +27,6 @@ word-wrap: break-word;
 background-color: rgba(255, 255, 255, 0.1);
 border-radius: 8px;
 min-height: 60px;
-display: flex;
 align-items: center;
 justify-content: center;
 font-weight: bold;
@@ -203,12 +204,8 @@ footer a:hover {
 text-decoration: underline;
 }
 .container {
-display: grid;
-grid-template-columns: 1fr 280px;
-gap: 2rem;
 max-width: 1200px;
 margin: 0 auto;
-padding: 0 1rem;
 }
 /* Horizontal list utility class */
 .horizontal-list {

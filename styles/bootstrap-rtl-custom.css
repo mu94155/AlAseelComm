@@ -1,0 +1,129 @@
+/* Bootstrap RTL Custom Styles for AlAseelComm - Simple Working Version */
+
+/* RTL Support */
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+/* FIX THE GRID ISSUE - Override home.css container grid */
+.container {
+    display: block !important; /* Override any grid display */
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    grid-template-columns: none !important; /* Remove grid columns */
+}
+
+/* Row centering */
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Remove any Bootstrap RTL conflicts */
+.me-auto {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Custom Home Page Layout - PERFECT CENTERING */
+.home-content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 15px;
+}
+
+.home-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.home-main {
+    flex: 2;
+    min-width: 0;
+}
+
+.home-sidebar {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+    }
+    
+    .home-sidebar {
+        min-width: auto;
+    }
+}
+
+/* Custom colors to match your theme */
+.bg-primary {
+    background-color: #6a56b4 !important;
+}
+
+.bg-secondary {
+    background-color: #87558e !important;
+}
+
+.btn-outline-primary {
+    color: #6a56b4;
+    border-color: #6a56b4;
+}
+
+.btn-outline-primary:hover {
+    background-color: #6a56b4;
+    border-color: #6a56b4;
+}
+
+/* Header styling */
+.header-content h1 {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    font-weight: bold;
+}
+
+.AlaseelAdd {
+    border-radius: 5%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Card enhancements */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Footer links spacing for RTL */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
