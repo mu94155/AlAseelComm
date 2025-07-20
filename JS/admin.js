@@ -437,6 +437,15 @@ function testAndRefreshHome() {
 // تهيئة لوحة الإدارة
 let admin;
 document.addEventListener('DOMContentLoaded', async () => {
+    // التحقق من المصادقة أولاً
+    if (!adminAuth.isAdmin()) {
+        // إعادة توجيه للصفحة الرئيسية مع رسالة
+        alert('يجب تسجيل الدخول كمدير للوصول إلى هذه الصفحة');
+        window.location.href = 'Aseel-home-01.html';
+        return;
+    }
+    
+    // إذا كان المستخدم مدير، تشغيل لوحة الإدارة
     admin = new NewsAdmin();
     await admin.init();
 });

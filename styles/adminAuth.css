@@ -1,0 +1,344 @@
+/* تنسيق نظام المصادقة */
+
+/* أزرار تسجيل الدخول والخروج وتغيير كلمة المرور */
+.admin-login-btn,
+.admin-logout-btn,
+.admin-change-password-btn {
+    background-color: rgba(255, 87, 51, 0.2) !important;
+    border: 1px solid #ff5733 !important;
+    color: #ff5733 !important;
+}
+
+.admin-login-btn:hover,
+.admin-logout-btn:hover,
+.admin-change-password-btn:hover {
+    background-color: #ff5733 !important;
+    color: white !important;
+}
+
+/* تنسيق خاص لزر تغيير كلمة المرور */
+.admin-change-password-btn {
+    background-color: rgba(40, 167, 69, 0.2) !important;
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+}
+
+.admin-change-password-btn:hover {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+/* إخفاء رابط الإدارة افتراضياً */
+.admin-link {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* إظهار رابط الإدارة عند المصادقة */
+.admin-link.authenticated {
+    display: inline-block !important;
+    opacity: 1;
+}
+
+/* نافذة تسجيل الدخول */
+.admin-login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10000;
+    min-width: 300px;
+    max-width: 400px;
+    direction: rtl;
+    text-align: right;
+}
+
+.modal-content h3 {
+    color: #ff5733;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.modal-content .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    direction: ltr;
+    text-align: center;
+}
+
+.modal-content input[type="password"]:focus {
+    outline: none;
+    border-color: #ff5733;
+    box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.form-actions button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.form-actions button[type="submit"] {
+    background: #ff5733;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    background: #e64a2e;
+    transform: translateY(-1px);
+}
+
+.form-actions button[type="button"] {
+    background: #6c757d;
+    color: white;
+}
+
+.form-actions button[type="button"]:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+}
+
+#login-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* رسائل النظام */
+.admin-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    direction: rtl;
+}
+
+.admin-message.show {
+    transform: translateX(0);
+}
+
+.admin-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.admin-message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.admin-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* تحسين الاستجابة للهواتف المحمولة */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        min-width: auto;
+        max-width: none;
+        width: calc(100% - 2rem);
+    }
+    
+    .admin-message {
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+/* نافذة تغيير كلمة المرور */
+.admin-change-password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-change-password-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.admin-change-password-modal .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    z-index: 10000;
+}
+
+.admin-change-password-modal h3 {
+    text-align: center;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.admin-change-password-modal .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.admin-change-password-modal label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+.admin-change-password-modal input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.admin-change-password-modal input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.admin-change-password-modal .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.admin-change-password-modal .form-actions button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-change-password-modal .form-actions button[type="submit"] {
+    background: #28a745;
+    color: white;
+}
+
+.admin-change-password-modal .form-actions button[type="submit"]:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.admin-change-password-modal .form-actions button[type="button"] {
+    background: #6c757d;
+    color: white;
+}
+
+.admin-change-password-modal .form-actions button[type="button"]:hover {
+    background: #5a6268;
+}
+
+.admin-change-password-modal #change-password-message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* تصميم متجاوب لنافذة تغيير كلمة المرور */
+@media (max-width: 768px) {
+    .admin-change-password-modal .modal-content {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+    
+    .admin-change-password-modal .form-actions {
+        flex-direction: column;
+    }
+    
+    .admin-change-password-modal .form-actions button {
+        width: 100%;
+    }
+}
