@@ -48,6 +48,12 @@ class CustomerAuth {
             adminPanel.style.display = 'none';
         }
 
+        // التحقق من وجود رسالة المصادقة مسبقاً لتجنب التكرار
+        const existingAuthMessage = document.getElementById('customer-auth-message');
+        if (existingAuthMessage) {
+            existingAuthMessage.remove();
+        }
+
         const container = document.querySelector('.container');
         if (container) {
             const authMessage = document.createElement('div');
@@ -168,10 +174,13 @@ class CustomerAuth {
 
     // إزالة نافذة تسجيل الدخول
     removeLoginModal() {
-        const modal = document.querySelector('.customer-login-modal');
-        if (modal) {
-            modal.remove();
-        }
+        // إزالة جميع النوافذ المنبثقة للمصادقة
+        const modals = document.querySelectorAll('.customer-login-modal');
+        modals.forEach(modal => modal.remove());
+        
+        // إزالة أي نوافذ أخرى قد تكون موجودة
+        const adminModals = document.querySelectorAll('.admin-login-modal');
+        adminModals.forEach(modal => modal.remove());
     }
 
     // معالجة تسجيل الدخول
