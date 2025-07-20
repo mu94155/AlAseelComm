@@ -250,16 +250,14 @@
     </footer>
 
     <!-- ملفات JavaScript -->
-    <script src="JS/customerAuth.js"></script>
     <script src="JS/customersManager.js"></script>
     <script>
-        // حماية الصفحة - فقط لمديري العملاء
+        // إظهار نظام إدارة العملاء مباشرة
         document.addEventListener('DOMContentLoaded', function() {
-            // التحقق من المصادقة مع نظام العملاء المنفصل
-            if (!customerAuth.checkAuthStatus()) {
-                customerAuth.showAuthRequired();
-            } else {
-                customerAuth.showCustomerManagement();
+            // إظهار لوحة الإدارة مباشرة بدون مصادقة
+            const adminPanel = document.querySelector('.admin-panel');
+            if (adminPanel) {
+                adminPanel.style.display = 'block';
             }
         });
     </script>
