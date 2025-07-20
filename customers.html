@@ -7,25 +7,36 @@
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/customers.css">
     <style>
-        /* تحسين التوسيط والتخطيط */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
+        /* إعادة تعيين النمط الأساسي للصفحة */
         body {
             margin: 0;
             padding: 0;
             direction: rtl;
+            text-align: right;
+        }
+
+        /* تعديل حاوي الصفحة الرئيسي */
+        .customers-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            display: block; /* إلغاء التأثير من grid layout */
+        }
+        
+        /* تحسين توسيط لوحة الإدارة */
+        .admin-panel {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
         }
 
         /* إخفاء العناصر البصرية للقراءة فقط بواسطة قارئ الشاشة */
         .visually-hidden {
             position: absolute !important;
-            height: 1px; width: 1px;
+            height: 1px; 
+            width: 1px;
             overflow: hidden;
             clip: rect(1px, 1px, 1px, 1px);
             white-space: nowrap;
@@ -33,11 +44,10 @@
         
         /* تحسين توسيط المحتوى */
         .toolbar,
-        .search-filter-bar,
         .stats-cards,
         .customers-table-container {
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            margin: 0 auto 2rem auto;
         }
         
         /* إخفاء ملف الاستيراد */
@@ -46,15 +56,31 @@
         }
         
         /* تحسين التصميم المتجاوب */
+        @media (max-width: 1200px) {
+            .customers-container {
+                max-width: 100%;
+                padding: 1rem;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
+            .customers-container {
+                padding: 0.5rem;
+            }
+            
+            .toolbar {
+                padding: 1rem;
+            }
+            
+            .toolbar-actions {
+                width: 100%;
+                justify-content: center;
             }
         }
         
         @media (max-width: 480px) {
-            .container {
-                padding: 0 0.5rem;
+            .customers-container {
+                padding: 0.25rem;
             }
         }
     </style>
@@ -76,7 +102,7 @@
     </nav>
 
     <!-- المحتوى الرئيسي -->
-    <div class="container">
+    <div class="customers-container">
         <div class="admin-panel">
             <!-- شريط الأدوات -->
             <div class="toolbar">

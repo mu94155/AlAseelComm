@@ -31,8 +31,10 @@
 /* ==================== التخطيط العام ==================== */
 .admin-panel {
     max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 1rem auto;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ==================== شريط الأدوات ==================== */
@@ -41,13 +43,15 @@
     color: white;
     padding: 1.5rem;
     border-radius: var(--border-radius-lg);
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     box-shadow: var(--box-shadow);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .toolbar h2 {
@@ -206,7 +210,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem auto;
+    max-width: 100%;
+    justify-content: center;
 }
 
 .stat-card {
@@ -242,7 +248,10 @@
     border-radius: var(--border-radius-lg);
     box-shadow: var(--box-shadow);
     overflow: hidden;
+    overflow-x: auto;
     border: 1px solid var(--border-color);
+    margin: 0 auto 2rem auto;
+    width: 100%;
 }
 
 .data-table {
@@ -572,7 +581,9 @@
 /* ==================== التصميم المتجاوب ==================== */
 @media (max-width: 1200px) {
     .admin-panel {
-        padding: 0 0.5rem;
+        padding: 0;
+        margin: 1rem auto;
+        max-width: 100%;
     }
     
     .form-grid {
