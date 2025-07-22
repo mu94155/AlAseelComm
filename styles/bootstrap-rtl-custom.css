@@ -6,14 +6,21 @@ body {
     text-align: right;
 }
 
-/* FIX THE GRID ISSUE - Override home.css container grid */
-.container {
-    display: block !important; /* Override any grid display */
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-    grid-template-columns: none !important; /* Remove grid columns */
+/* FIX THE GRID ISSUE - More specific override without breaking Bootstrap */
+.home-content-wrapper .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Only override specific containers, not all Bootstrap containers */
+.aseel-container {
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Row centering */

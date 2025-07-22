@@ -1,10 +1,13 @@
-body {
+/* Use more specific selectors to avoid Bootstrap conflicts */
+.home-page body {
 margin: 0;
 padding: 0;
 font-family: Arial, sans-serif;
 line-height: 1.6;
 }
-header {
+
+/* Custom header styles - use class instead of tag */
+.aseel-header {
 background: linear-gradient(135deg, #6a56b4, #87558e);
 color: white;
 padding: 2rem;
@@ -41,11 +44,14 @@ display: block;
 object-fit: cover;
 overflow: hidden;
 }
-nav {
+/* Custom navigation styles - more specific */
+.aseel-nav {
 background-color: #87558e;
 padding: 0.5rem;
 }
-.navbar{
+
+/* Override Bootstrap navbar only when needed */
+.navbar.aseel-navbar {
 list-style: none;
 margin-top: 0.1rem;
 padding: 0;
@@ -55,18 +61,20 @@ justify-content: center;
 nav li {
 margin: 0 1rem;
 }
-nav a {
+/* Custom navigation links - more specific */
+.aseel-nav a {
 color: white;
 text-decoration: none;
 padding: 0.5rem 1rem;
 border-radius: 4px;
 transition: background-color 0.3s;
 }
-nav a:hover {
+.aseel-nav a:hover {
 background-color: #2c3e50;
 }
 
-main {
+/* Custom main content - use class instead of tag */
+.aseel-main {
 min-height: 60vh;
 padding: 2rem;
 max-width: 1200px;
