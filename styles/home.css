@@ -8,7 +8,7 @@ line-height: 1.6;
 
 /* Custom header styles - use class instead of tag */
 .aseel-header {
-background: linear-gradient(135deg, #6a56b4, #87558e);
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 color: white;
 padding: 2rem;
 border-radius: 12px;
@@ -50,6 +50,20 @@ background-color: #87558e;
 padding: 0.5rem;
 }
 
+/* Override Bootstrap navbar background color */
+nav.navbar.bg-secondary {
+background-color: #b4a010 !important;
+}
+
+/* Override navbar text color to black */
+nav.navbar.navbar-dark .navbar-nav .nav-link {
+color: black !important;
+}
+
+nav.navbar.navbar-dark .navbar-nav .nav-link:hover {
+color: #333 !important;
+}
+
 /* Override Bootstrap navbar only when needed */
 .navbar.aseel-navbar {
 list-style: none;
@@ -63,7 +77,7 @@ margin: 0 1rem;
 }
 /* Custom navigation links - more specific */
 .aseel-nav a {
-color: white;
+color: black;
 text-decoration: none;
 padding: 0.5rem 1rem;
 border-radius: 4px;
@@ -240,4 +254,8 @@ nav ul {
 flex-direction: column;
 align-items: center;
 }
+}
+:root {
+--primary-color: #5400b4;
+--secondary-color: #b4a010;
 }
