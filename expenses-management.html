@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألأصيل - إدارة مصاريف المشروع</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/bootstrap-rtl-custom.css">
+    <style>
+        .expense-card {
+            border-left: 4px solid #007bff;
+            transition: all 0.3s ease;
+        }
+        .expense-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .milestone-badge {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+        .payment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .status-paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .expense-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .progress-custom {
+            height: 8px;
+            border-radius: 4px;
+        }
+        .form-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .search-filters {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-group-vertical .btn {
+            margin-bottom: 0.5rem;
+        }
+        .alert-floating {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+        .expenses-stats {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card.primary {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+        }
+        .stat-card.success {
+            background: linear-gradient(45deg, #28a745, #1e7e34);
+            color: white;
+        }
+        .stat-card.warning {
+            background: linear-gradient(45deg, #ffc107, #e0a800);
+            color: #212529;
+        }
+        .stat-card.info {
+            background: linear-gradient(45deg, #17a2b8, #117a8b);
+            color: white;
+        }
+        #cancelEditExpense, #cancelEditMilestone {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header class="bg-primary text-white">
+        <div class="container">
+            <div class="header-content text-center py-4">
+                <h1 class="display-5 mb-3">نظام إدارة مصاريف المشروع</h1>
+                <p class="lead">إدارة شاملة لمصاريف مجمع الأصيل التجاري ومراحل المشروع</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="Aseel-home-01.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#expenses">المصاريف</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#milestones">المراحل</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reports">التقارير</a></li>
+                    <li class="nav-item"><a class="nav-link" href="budget-settings.html">الإعدادات</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container my-5">
+        <!-- ملخص المشروع -->
+        <div class="expense-summary text-center">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="h4">إجمالي الميزانية</h3>
+                    <p class="h2 mb-0" id="totalBudget">2,500,000 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">المبلغ المنفق</h3>
+                    <p class="h2 mb-0" id="totalExpended">0 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">المبلغ المتبقي</h3>
+                    <p class="h2 mb-0" id="totalRemaining">2,500,000 ر.ع</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="h4">نسبة الإنجاز</h3>
+                    <p class="h2 mb-0" id="completionPercentage">0%</p>
+                </div>
+            </div>
+            <div class="progress progress-custom mt-3">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        <!-- إحصائيات سريعة -->
+        <div class="expenses-stats">
+            <h2 class="h4 mb-4 text-center">إحصائيات سريعة</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card primary">
+                        <h3 id="totalExpensesCount">0</h3>
+                        <p class="mb-0">إجمالي المصاريف</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card success">
+                        <h3 id="completedMilestonesCount">0</h3>
+                        <p class="mb-0">مراحل مكتملة</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card warning">
+                        <h3 id="pendingMilestonesCount">0</h3>
+                        <p class="mb-0">مراحل معلقة</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card info">
+                        <h3 id="monthlyExpensesTotal">0</h3>
+                        <p class="mb-0">مصاريف هذا الشهر</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم إدارة المصاريف -->
+        <section id="expenses-management" class="mb-5">
+            <h2 class="h3 mb-4 text-center">إدارة المصاريف العادية</h2>
+            
+            <!-- البحث والفلترة -->
+            <div class="search-filters">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="searchExpenses" class="form-label">البحث في المصاريف</label>
+                        <input type="text" class="form-control" id="searchExpenses" placeholder="ابحث بالوصف أو المبلغ أو الملاحظات...">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterCategory" class="form-label">فلترة حسب الفئة</label>
+                        <select class="form-select" id="filterCategory">
+                            <option value="">جميع الفئات</option>
+                            <option value="construction">أعمال البناء</option>
+                            <option value="materials">مواد البناء</option>
+                            <option value="salaries">الرواتب والأجور</option>
+                            <option value="utilities">المرافق والكهرباء</option>
+                            <option value="maintenance">الصيانة</option>
+                            <option value="equipment">المعدات والآلات</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="button" class="btn btn-outline-secondary w-100" onclick="location.reload()">
+                            <i class="bi bi-arrow-clockwise"></i> إعادة تحميل
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول المصاريف -->
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>وصف المصروف</th>
+                                <th>المبلغ</th>
+                                <th>الفئة</th>
+                                <th>التاريخ</th>
+                                <th>الملاحظات</th>
+                                <th>تاريخ الإضافة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">
+                                    <i class="bi bi-hourglass-split fs-1 d-block mb-2"></i>
+                                    جاري تحميل البيانات...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- نماذج إضافة/تعديل -->
+        <section id="forms-section" class="mb-5">
+            <div class="row">
+                <!-- نموذج إضافة/تعديل المصروف -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h5 mb-0">➕ إضافة مصروف جديد</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="expenseForm">
+                                <div class="mb-3">
+                                    <label for="expenseDescription" class="form-label">وصف المصروف *</label>
+                                    <input type="text" class="form-control" id="expenseDescription" name="expenseDescription" placeholder="مثل: مواد البناء، رواتب العمال، الكهرباء" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseAmount" class="form-label">المبلغ (ر.ع) *</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="0.00" min="0" step="0.01" required>
+                                        <span class="input-group-text">ر.ع</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseCategory" class="form-label">فئة المصروف *</label>
+                                    <select class="form-select" id="expenseCategory" name="expenseCategory" required>
+                                        <option value="">اختر الفئة</option>
+                                        <option value="construction">أعمال البناء</option>
+                                        <option value="materials">مواد البناء</option>
+                                        <option value="salaries">الرواتب والأجور</option>
+                                        <option value="utilities">المرافق والكهرباء</option>
+                                        <option value="maintenance">الصيانة</option>
+                                        <option value="equipment">المعدات والآلات</option>
+                                        <option value="other">أخرى</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseDate" class="form-label">تاريخ المصروف *</label>
+                                    <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="expenseNotes" class="form-label">ملاحظات إضافية</label>
+                                    <textarea class="form-control" id="expenseNotes" name="expenseNotes" rows="3" placeholder="أي ملاحظات أو تفاصيل إضافية..."></textarea>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary" id="expenseSubmitBtn">💾 حفظ المصروف</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="cancelEditExpense">❌ إلغاء التعديل</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- نموذج إضافة/تعديل المرحلة -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h3 class="h5 mb-0">📅 جدولة دفعة مرحلية جديدة</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="milestoneForm">
+                                <div class="mb-3">
+                                    <label for="milestoneTitle" class="form-label">عنوان المرحلة *</label>
+                                    <input type="text" class="form-control" id="milestoneTitle" name="milestoneTitle" placeholder="مثل: المرحلة الرابعة - أعمال التشطيب النهائية" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneAmount" class="form-label">مبلغ الدفعة (ر.ع) *</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="milestoneAmount" name="milestoneAmount" placeholder="0.00" min="0" step="0.01" required>
+                                        <span class="input-group-text">ر.ع</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneDate" class="form-label">تاريخ الدفعة المتوقع *</label>
+                                    <input type="date" class="form-control" id="milestoneDate" name="milestoneDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneStatus" class="form-label">حالة المرحلة *</label>
+                                    <select class="form-select" id="milestoneStatus" name="milestoneStatus" required>
+                                        <option value="">اختر الحالة</option>
+                                        <option value="scheduled">مجدولة</option>
+                                        <option value="in-progress">قيد التنفيذ</option>
+                                        <option value="completed">مكتملة</option>
+                                        <option value="pending">في انتظار الموافقة</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneContractor" class="form-label">المقاول/المورد</label>
+                                    <input type="text" class="form-control" id="milestoneContractor" name="milestoneContractor" placeholder="اسم الشركة أو المقاول المسؤول">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="milestoneDescription" class="form-label">وصف أعمال المرحلة *</label>
+                                    <textarea class="form-control" id="milestoneDescription" name="milestoneDescription" rows="3" placeholder="تفاصيل الأعمال المطلوب إنجازها في هذه المرحلة..." required></textarea>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-info" id="milestoneSubmitBtn">📋 جدولة المرحلة</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="cancelEditMilestone">❌ إلغاء التعديل</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المراحل والدفعات المرحلية -->
+        <section id="milestones" class="mb-5">
+            <h2 class="h3 mb-4 text-center">مراحل المشروع والدفعات المرحلية</h2>
+            <div id="milestonesContainer">
+                <!-- سيتم تحميل المراحل هنا عبر JavaScript -->
+            </div>
+        </section>
+
+        <!-- الإجراءات السريعة -->
+        <section class="text-center mb-5">
+            <h2 class="h3 mb-4">الإجراءات السريعة</h2>
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-primary btn-lg w-100" onclick="document.getElementById('expenseForm').scrollIntoView({ behavior: 'smooth' })">
+                        <i class="bi bi-plus-circle"></i><br>
+                        إضافة مصروف
+                    </button>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-info btn-lg w-100" onclick="document.getElementById('milestoneForm').scrollIntoView({ behavior: 'smooth' })">
+                        <i class="bi bi-calendar-check"></i><br>
+                        جدولة دفعة
+                    </button>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-success btn-lg w-100" onclick="expensesManager.exportData('csv')">
+                        <i class="bi bi-file-earmark-text"></i><br>
+                        تصدير CSV
+                    </button>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-warning btn-lg w-100" onclick="expensesManager.exportData('excel')">
+                        <i class="bi bi-file-earmark-excel"></i><br>
+                        تصدير Excel
+                    </button>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="budget-settings.html" class="btn btn-secondary btn-lg w-100">
+                        <i class="bi bi-gear"></i><br>
+                        إعدادات الميزانية
+                    </a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-outline-danger btn-lg w-100" onclick="clearAllData()">
+                        <i class="bi bi-trash"></i><br>
+                        مسح جميع البيانات
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="text-center">
+                <p class="mb-2">&copy; 2025 مجمع ألأصيل التجاري - نظام إدارة المصاريف والمدفوعات</p>
+                <p class="small text-muted">آخر تحديث: 22 يوليو 2025 | النسخة 2.0 - إدارة كاملة للمصاريف</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SheetJS for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="JS/expensesManager.js"></script>
+    
+    <script>
+        // دوال إضافية خاصة بالصفحة
+        
+        // مسح جميع البيانات
+        function clearAllData() {
+            if (confirm('هل أنت متأكد من مسح جميع البيانات؟\n\nتحذير: هذا الإجراء سيحذف:\n- جميع المصاريف المسجلة\n- جميع المراحل المضافة\n- إعدادات الميزانية\n\nلا يمكن التراجع عن هذا الإجراء!')) {
+                if (confirm('تأكيد نهائي: هل أنت متأكد 100% من مسح جميع البيانات؟')) {
+                    localStorage.removeItem('alaseel_expenses');
+                    localStorage.removeItem('alaseel_milestones');
+                    localStorage.removeItem('alaseel_budget_settings');
+                    location.reload();
+                }
+            }
+        }
+
+        // تحديث الإحصائيات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأخير بسيط للتأكد من تحميل مدير المصاريف
+            setTimeout(updateQuickStats, 500);
+        });
+
+        function updateQuickStats() {
+            if (typeof expensesManager !== 'undefined') {
+                // إجمالي المصاريف
+                document.getElementById('totalExpensesCount').textContent = expensesManager.expenses.length;
+                
+                // المراحل المكتملة
+                const completedMilestones = expensesManager.milestones.filter(m => m.status === 'completed').length;
+                document.getElementById('completedMilestonesCount').textContent = completedMilestones;
+                
+                // المراحل المعلقة
+                const pendingMilestones = expensesManager.milestones.filter(m => m.status === 'pending' || m.status === 'in-progress').length;
+                document.getElementById('pendingMilestonesCount').textContent = pendingMilestones;
+                
+                // مصاريف هذا الشهر
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getFullYear();
+                const monthlyExpenses = expensesManager.expenses.filter(exp => {
+                    const expDate = new Date(exp.date);
+                    return expDate.getMonth() === currentMonth && expDate.getFullYear() === currentYear;
+                }).reduce((sum, exp) => sum + exp.amount, 0);
+                
+                document.getElementById('monthlyExpensesTotal').textContent = monthlyExpenses.toLocaleString();
+            }
+        }
+
+        // تحديث الإحصائيات عند تغيير البيانات
+        const originalLoadExpenses = expensesManager?.loadExpenses;
+        const originalLoadMilestones = expensesManager?.loadMilestones;
+
+        // تطبيق تأثيرات بصرية إضافية
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير على الكروت
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // تعيين التاريخ الحالي كقيمة افتراضية
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('expenseDate').value = today;
+            
+            // تحديث التاريخ كل يوم
+            setInterval(() => {
+                const newToday = new Date().toISOString().split('T')[0];
+                if (document.getElementById('expenseDate').value === today) {
+                    document.getElementById('expenseDate').value = newToday;
+                }
+            }, 86400000); // كل 24 ساعة
+        });
+
+        // دالة للتمرير السلس إلى قسم معين
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // اختصارات لوحة المفاتيح
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + N: إضافة مصروف جديد
+            if (e.ctrlKey && e.key === 'n') {
+                e.preventDefault();
+                document.getElementById('expenseDescription').focus();
+            }
+            
+            // Ctrl + M: إضافة مرحلة جديدة
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                document.getElementById('milestoneTitle').focus();
+            }
+            
+            // Ctrl + S: حفظ (إذا كان النموذج مفتوح)
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                const activeElement = document.activeElement;
+                if (activeElement.closest('#expenseForm')) {
+                    document.getElementById('expenseForm').dispatchEvent(new Event('submit'));
+                } else if (activeElement.closest('#milestoneForm')) {
+                    document.getElementById('milestoneForm').dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        // طباعة التقرير
+        function printReport() {
+            const printWindow = window.open('', '_blank');
+            const currentData = {
+                expenses: expensesManager.expenses,
+                milestones: expensesManager.milestones,
+                summary: {
+                    totalBudget: expensesManager.budgetSettings.totalBudget,
+                    totalExpended: expensesManager.calculateTotalExpended(),
+                    totalRemaining: expensesManager.budgetSettings.totalBudget - expensesManager.calculateTotalExpended()
+                }
+            };
+            
+            printWindow.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>تقرير مصاريف مجمع الأصيل التجاري</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 2cm; }
+                        h1, h2 { color: #007bff; text-align: center; }
+                        table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }
+                        th { background-color: #f8f9fa; }
+                        .summary { background: #e9ecef; padding: 1rem; margin-bottom: 2rem; }
+                    </style>
+                </head>
+                <body>
+                    <h1>تقرير مصاريف مجمع الأصيل التجاري</h1>
+                    <p style="text-align: center;">تاريخ التقرير: ${new Date().toLocaleDateString('ar-EG')}</p>
+                    
+                    <div class="summary">
+                        <h2>ملخص المشروع</h2>
+                        <p>إجمالي الميزانية: ${currentData.summary.totalBudget.toLocaleString()} ر.ع</p>
+                        <p>المبلغ المنفق: ${currentData.summary.totalExpended.toLocaleString()} ر.ع</p>
+                        <p>المبلغ المتبقي: ${currentData.summary.totalRemaining.toLocaleString()} ر.ع</p>
+                    </div>
+                    
+                    <h2>المصاريف العادية</h2>
+                    <table>
+                        <thead>
+                            <tr><th>الوصف</th><th>المبلغ</th><th>الفئة</th><th>التاريخ</th></tr>
+                        </thead>
+                        <tbody>
+                            ${currentData.expenses.map(exp => `
+                                <tr>
+                                    <td>${exp.description}</td>
+                                    <td>${exp.amount.toLocaleString()} ر.ع</td>
+                                    <td>${expensesManager.getCategoryName(exp.category)}</td>
+                                    <td>${new Date(exp.date).toLocaleDateString('ar-EG')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <h2>المراحل والدفعات</h2>
+                    <table>
+                        <thead>
+                            <tr><th>المرحلة</th><th>المبلغ</th><th>الحالة</th><th>تاريخ الاستحقاق</th></tr>
+                        </thead>
+                        <tbody>
+                            ${currentData.milestones.map(milestone => `
+                                <tr>
+                                    <td>${milestone.title}</td>
+                                    <td>${milestone.amount.toLocaleString()} ر.ع</td>
+                                    <td>${expensesManager.getStatusName(milestone.status)}</td>
+                                    <td>${new Date(milestone.dueDate).toLocaleDateString('ar-EG')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+</body>
+</html>
