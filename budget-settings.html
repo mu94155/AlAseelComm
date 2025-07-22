@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألأصيل - إعدادات الميزانية</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/bootstrap-rtl-custom.css">
+    <style>
+        .budget-card {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .budget-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+        }
+        .budget-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 1.5rem;
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-color: #ced4da;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+        }
+        .alert-custom {
+            border-radius: 10px;
+            border: none;
+        }
+        .btn-action {
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: bold;
+        }
+        .category-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #007bff;
+        }
+        .percentage-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            overflow: hidden;
+        }
+        .percentage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الصفحة (Header) -->
+    <header class="bg-primary text-white">
+        <div class="container">
+            <div class="header-content text-center py-4">
+                <h1 class="display-5 mb-3">
+                    <i class="bi bi-gear me-3"></i>
+                    إعدادات ميزانية المشروع
+                </h1>
+                <p class="lead">تحديد وإدارة الميزانية الإجمالية وتوزيعها على المراحل والفئات</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التنقل (Navigation) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="Aseel-home-01.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="project-expenses.html">المصاريف</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#budget">إعدادات الميزانية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reports">التقارير</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container my-5">
+        
+        <!-- رسالة النجاح -->
+        <div id="successAlert" class="alert alert-success alert-custom d-none" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <strong>تم الحفظ بنجاح!</strong> تم تحديث إعدادات الميزانية.
+        </div>
+
+        <!-- إعداد الميزانية الإجمالية -->
+        <div class="budget-card mb-5">
+            <div class="budget-header">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-wallet2 me-2"></i>
+                    إعداد الميزانية الإجمالية للمشروع
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <form id="totalBudgetForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="totalBudget" class="form-label">الميزانية الإجمالية</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control form-control-lg" id="totalBudget" value="2500000" min="1" step="1" required>
+                                <span class="input-group-text">ريال عماني</span>
+                            </div>
+                            <div class="form-text">أدخل الميزانية الكاملة المتاحة للمشروع</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="projectName" class="form-label">اسم المشروع</label>
+                            <input type="text" class="form-control form-control-lg" id="projectName" value="مجمع الأصيل التجاري" required>
+                            <div class="form-text">اسم المشروع الذي تديره</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="startDate" class="form-label">تاريخ بداية المشروع</label>
+                            <input type="date" class="form-control" id="startDate" value="2025-01-01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="endDate" class="form-label">تاريخ انتهاء المشروع المتوقع</label>
+                            <input type="date" class="form-control" id="endDate" value="2025-12-31" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectDescription" class="form-label">وصف المشروع</label>
+                        <textarea class="form-control" id="projectDescription" rows="3" placeholder="وصف مختصر عن المشروع وأهدافه...">مجمع تجاري متكامل يضم محلات تجارية ومكاتب إدارية ومرافق خدمية في موقع استراتيجي</textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- توزيع الميزانية على الفئات -->
+        <div class="budget-card mb-5">
+            <div class="budget-header">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-pie-chart me-2"></i>
+                    توزيع الميزانية على الفئات
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <div id="budgetCategories">
+                    <!-- فئة أعمال البناء -->
+                    <div class="category-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">أعمال البناء والإنشاءات</h5>
+                            <span class="badge bg-primary" id="construction-percentage">40%</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="number" class="form-control category-budget" data-category="construction" value="1000000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" id="construction-bar" style="width: 40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة المواد -->
+                    <div class="category-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">المواد والمعدات</h5>
+                            <span class="badge bg-info" id="materials-percentage">25%</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="number" class="form-control category-budget" data-category="materials" value="625000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" id="materials-bar" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة الرواتب -->
+                    <div class="category-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">الرواتب والأجور</h5>
+                            <span class="badge bg-success" id="salaries-percentage">20%</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="number" class="form-control category-budget" data-category="salaries" value="500000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" id="salaries-bar" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة المرافق -->
+                    <div class="category-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">المرافق والصيانة</h5>
+                            <span class="badge bg-warning" id="utilities-percentage">10%</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="number" class="form-control category-budget" data-category="utilities" value="250000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" id="utilities-bar" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة الطوارئ -->
+                    <div class="category-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">احتياطي الطوارئ</h5>
+                            <span class="badge bg-danger" id="emergency-percentage">5%</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="number" class="form-control category-budget" data-category="emergency" value="125000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" id="emergency-bar" style="width: 5%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ملخص التوزيع -->
+                <div class="mt-4 p-3 bg-light border-start border-primary border-4">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <h6>إجمالي المخصص</h6>
+                            <h4 class="text-primary" id="totalAllocated">2,500,000 ر.ع</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>المتبقي للتوزيع</h6>
+                            <h4 class="text-success" id="remainingBudget">0 ر.ع</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>نسبة التوزيع</h6>
+                            <h4 class="text-info" id="allocationPercentage">100%</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>الحالة</h6>
+                            <h4 class="text-warning" id="budgetStatus">متوازن</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- إعدادات المراحل -->
+        <div class="budget-card mb-5">
+            <div class="budget-header">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-list-task me-2"></i>
+                    إعداد مراحل المشروع
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <div id="projectPhases">
+                    <!-- المرحلة الأولى -->
+                    <div class="phase-item mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">اسم المرحلة</label>
+                                <input type="text" class="form-control" value="الأساسات والهيكل" placeholder="اسم المرحلة">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الميزانية المخصصة</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control phase-budget" value="800000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" class="form-control" value="2025-01-01">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" class="form-control" value="2025-03-31">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- المرحلة الثانية -->
+                    <div class="phase-item mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">اسم المرحلة</label>
+                                <input type="text" class="form-control" value="البناء والتشطيبات الأساسية" placeholder="اسم المرحلة">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الميزانية المخصصة</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control phase-budget" value="950000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" class="form-control" value="2025-04-01">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" class="form-control" value="2025-07-31">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- المرحلة الثالثة -->
+                    <div class="phase-item mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">اسم المرحلة</label>
+                                <input type="text" class="form-control" value="التشطيبات النهائية والتجهيزات" placeholder="اسم المرحلة">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الميزانية المخصصة</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control phase-budget" value="750000" min="0" step="1000">
+                                    <span class="input-group-text">ر.ع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" class="form-control" value="2025-08-01">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" class="form-control" value="2025-12-31">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-outline-primary" onclick="addNewPhase()">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        إضافة مرحلة جديدة
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- أزرار الحفظ والإجراءات -->
+        <div class="text-center mb-5">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-success btn-action w-100" onclick="saveBudgetSettings()">
+                        <i class="bi bi-check-circle me-2"></i>
+                        حفظ الإعدادات
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-info btn-action w-100" onclick="previewBudget()">
+                        <i class="bi bi-eye me-2"></i>
+                        معاينة الميزانية
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button class="btn btn-warning btn-action w-100" onclick="resetToDefaults()">
+                        <i class="bi bi-arrow-clockwise me-2"></i>
+                        استعادة الافتراضي
+                    </button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="project-expenses.html" class="btn btn-secondary btn-action w-100">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        العودة للمصاريف
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="text-center">
+                <p class="mb-2">&copy; 2025 مجمع ألأصيل التجاري - نظام إدارة الميزانية</p>
+                <p class="small text-muted">آخر تحديث: 22 يوليو 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // متغيرات عامة
+        let totalBudget = 2500000;
+        let phaseCounter = 3;
+
+        // تحديث الحسابات عند تغيير القيم
+        document.addEventListener('DOMContentLoaded', function() {
+            // استمع لتغييرات الميزانية الإجمالية
+            document.getElementById('totalBudget').addEventListener('input', function() {
+                totalBudget = parseFloat(this.value) || 0;
+                updateBudgetCalculations();
+            });
+
+            // استمع لتغييرات فئات الميزانية
+            document.querySelectorAll('.category-budget').forEach(input => {
+                input.addEventListener('input', updateBudgetCalculations);
+            });
+
+            // استمع لتغييرات مراحل المشروع
+            document.querySelectorAll('.phase-budget').forEach(input => {
+                input.addEventListener('input', updatePhaseCalculations);
+            });
+
+            // تحديث الحسابات الأولية
+            updateBudgetCalculations();
+            updatePhaseCalculations();
+        });
+
+        // تحديث حسابات الميزانية
+        function updateBudgetCalculations() {
+            const totalBudgetEl = document.getElementById('totalBudget');
+            const totalBudget = parseFloat(totalBudgetEl.value) || 0;
+            
+            let totalAllocated = 0;
+            
+            // حساب المجموع المخصص وتحديث النسب
+            document.querySelectorAll('.category-budget').forEach(input => {
+                const amount = parseFloat(input.value) || 0;
+                totalAllocated += amount;
+                
+                const category = input.getAttribute('data-category');
+                const percentage = totalBudget > 0 ? (amount / totalBudget * 100).toFixed(1) : 0;
+                
+                // تحديث النسبة المئوية
+                document.getElementById(category + '-percentage').textContent = percentage + '%';
+                
+                // تحديث شريط التقدم
+                document.getElementById(category + '-bar').style.width = percentage + '%';
+            });
+
+            // تحديث الملخص
+            const remaining = totalBudget - totalAllocated;
+            const allocationPercentage = totalBudget > 0 ? (totalAllocated / totalBudget * 100).toFixed(1) : 0;
+            
+            document.getElementById('totalAllocated').textContent = formatCurrency(totalAllocated);
+            document.getElementById('remainingBudget').textContent = formatCurrency(remaining);
+            document.getElementById('allocationPercentage').textContent = allocationPercentage + '%';
+            
+            // تحديد حالة الميزانية
+            let status = 'متوازن';
+            let statusClass = 'text-success';
+            
+            if (remaining < 0) {
+                status = 'تجاوز الميزانية';
+                statusClass = 'text-danger';
+            } else if (remaining > totalBudget * 0.1) {
+                status = 'غير مكتمل';
+                statusClass = 'text-warning';
+            }
+            
+            const statusEl = document.getElementById('budgetStatus');
+            statusEl.textContent = status;
+            statusEl.className = 'h4 ' + statusClass;
+        }
+
+        // تحديث حسابات المراحل
+        function updatePhaseCalculations() {
+            let totalPhasesBudget = 0;
+            document.querySelectorAll('.phase-budget').forEach(input => {
+                totalPhasesBudget += parseFloat(input.value) || 0;
+            });
+            
+            // يمكن إضافة المزيد من الحسابات هنا
+        }
+
+        // تنسيق الأرقام المالية
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('ar-OM', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount) + ' ر.ع';
+        }
+
+        // إضافة مرحلة جديدة
+        function addNewPhase() {
+            phaseCounter++;
+            const phasesContainer = document.getElementById('projectPhases');
+            
+            const newPhase = document.createElement('div');
+            newPhase.className = 'phase-item mb-4';
+            newPhase.innerHTML = `
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">اسم المرحلة</label>
+                        <input type="text" class="form-control" value="المرحلة الجديدة ${phaseCounter}" placeholder="اسم المرحلة">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">الميزانية المخصصة</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control phase-budget" value="0" min="0" step="1000">
+                            <span class="input-group-text">ر.ع</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">تاريخ البداية</label>
+                        <input type="date" class="form-control" value="">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">تاريخ الانتهاء</label>
+                        <input type="date" class="form-control" value="">
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removePhase(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            phasesContainer.appendChild(newPhase);
+            
+            // إضافة مستمع للحقل الجديد
+            const newInput = newPhase.querySelector('.phase-budget');
+            newInput.addEventListener('input', updatePhaseCalculations);
+        }
+
+        // حذف مرحلة
+        function removePhase(button) {
+            if (confirm('هل أنت متأكد من حذف هذه المرحلة؟')) {
+                button.closest('.phase-item').remove();
+                updatePhaseCalculations();
+            }
+        }
+
+        // حفظ إعدادات الميزانية
+        function saveBudgetSettings() {
+            // جمع جميع البيانات
+            const budgetData = {
+                totalBudget: document.getElementById('totalBudget').value,
+                projectName: document.getElementById('projectName').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                projectDescription: document.getElementById('projectDescription').value,
+                categories: {},
+                phases: []
+            };
+
+            // جمع بيانات الفئات
+            document.querySelectorAll('.category-budget').forEach(input => {
+                const category = input.getAttribute('data-category');
+                budgetData.categories[category] = parseFloat(input.value) || 0;
+            });
+
+            // جمع بيانات المراحل
+            document.querySelectorAll('.phase-item').forEach(phaseEl => {
+                const inputs = phaseEl.querySelectorAll('input');
+                budgetData.phases.push({
+                    name: inputs[0].value,
+                    budget: parseFloat(inputs[1].value) || 0,
+                    startDate: inputs[2].value,
+                    endDate: inputs[3].value
+                });
+            });
+
+            // حفظ في localStorage (يمكن استبداله بحفظ في قاعدة البيانات)
+            localStorage.setItem('budgetSettings', JSON.stringify(budgetData));
+
+            // إظهار رسالة النجاح
+            const successAlert = document.getElementById('successAlert');
+            successAlert.classList.remove('d-none');
+            
+            setTimeout(() => {
+                successAlert.classList.add('d-none');
+            }, 3000);
+
+            console.log('تم حفظ إعدادات الميزانية:', budgetData);
+        }
+
+        // معاينة الميزانية
+        function previewBudget() {
+            const budgetData = gatherBudgetData();
+            
+            // إنشاء نافذة معاينة
+            const previewWindow = window.open('', '_blank', 'width=800,height=600');
+            previewWindow.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>معاينة الميزانية</title>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; color: #007bff; }
+                        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+                        .row { display: flex; justify-content: space-between; margin: 10px 0; }
+                        table { width: 100%; border-collapse: collapse; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }
+                        th { background-color: #f8f9fa; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>معاينة ميزانية المشروع</h1>
+                        <h2>${budgetData.projectName}</h2>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>معلومات عامة</h3>
+                        <div class="row"><span>الميزانية الإجمالية:</span><span>${formatCurrency(budgetData.totalBudget)}</span></div>
+                        <div class="row"><span>تاريخ البداية:</span><span>${budgetData.startDate}</span></div>
+                        <div class="row"><span>تاريخ الانتهاء:</span><span>${budgetData.endDate}</span></div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>توزيع الفئات</h3>
+                        <table>
+                            <tr><th>الفئة</th><th>المبلغ</th><th>النسبة</th></tr>
+                            ${Object.entries(budgetData.categories).map(([cat, amount]) => 
+                                `<tr><td>${getCategoryNameArabic(cat)}</td><td>${formatCurrency(amount)}</td><td>${((amount/budgetData.totalBudget)*100).toFixed(1)}%</td></tr>`
+                            ).join('')}
+                        </table>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>مراحل المشروع</h3>
+                        <table>
+                            <tr><th>المرحلة</th><th>الميزانية</th><th>تاريخ البداية</th><th>تاريخ الانتهاء</th></tr>
+                            ${budgetData.phases.map(phase => 
+                                `<tr><td>${phase.name}</td><td>${formatCurrency(phase.budget)}</td><td>${phase.startDate}</td><td>${phase.endDate}</td></tr>`
+                            ).join('')}
+                        </table>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button onclick="window.print()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px;">طباعة التقرير</button>
+                        <button onclick="window.close()" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 5px; margin-right: 10px;">إغلاق</button>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+
+        // جمع بيانات الميزانية
+        function gatherBudgetData() {
+            const budgetData = {
+                totalBudget: parseFloat(document.getElementById('totalBudget').value) || 0,
+                projectName: document.getElementById('projectName').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                projectDescription: document.getElementById('projectDescription').value,
+                categories: {},
+                phases: []
+            };
+
+            // جمع بيانات الفئات
+            document.querySelectorAll('.category-budget').forEach(input => {
+                const category = input.getAttribute('data-category');
+                budgetData.categories[category] = parseFloat(input.value) || 0;
+            });
+
+            // جمع بيانات المراحل
+            document.querySelectorAll('.phase-item').forEach(phaseEl => {
+                const inputs = phaseEl.querySelectorAll('input');
+                budgetData.phases.push({
+                    name: inputs[0].value,
+                    budget: parseFloat(inputs[1].value) || 0,
+                    startDate: inputs[2].value,
+                    endDate: inputs[3].value
+                });
+            });
+
+            return budgetData;
+        }
+
+        // الحصول على اسم الفئة بالعربية
+        function getCategoryNameArabic(category) {
+            const names = {
+                'construction': 'أعمال البناء والإنشاءات',
+                'materials': 'المواد والمعدات',
+                'salaries': 'الرواتب والأجور',
+                'utilities': 'المرافق والصيانة',
+                'emergency': 'احتياطي الطوارئ'
+            };
+            return names[category] || category;
+        }
+
+        // استعادة الإعدادات الافتراضية
+        function resetToDefaults() {
+            if (confirm('هل أنت متأكد من استعادة الإعدادات الافتراضية؟ سيتم فقدان جميع التغييرات غير المحفوظة.')) {
+                // إعادة تعيين القيم الافتراضية
+                document.getElementById('totalBudget').value = 2500000;
+                document.getElementById('projectName').value = 'مجمع الأصيل التجاري';
+                document.getElementById('startDate').value = '2025-01-01';
+                document.getElementById('endDate').value = '2025-12-31';
+                document.getElementById('projectDescription').value = 'مجمع تجاري متكامل يضم محلات تجارية ومكاتب إدارية ومرافق خدمية في موقع استراتيجي';
+
+                // إعادة تعيين فئات الميزانية
+                const categoryDefaults = {
+                    'construction': 1000000,
+                    'materials': 625000,
+                    'salaries': 500000,
+                    'utilities': 250000,
+                    'emergency': 125000
+                };
+
+                Object.entries(categoryDefaults).forEach(([category, value]) => {
+                    document.querySelector(`[data-category="${category}"]`).value = value;
+                });
+
+                // تحديث الحسابات
+                updateBudgetCalculations();
+                updatePhaseCalculations();
+
+                alert('تم استعادة الإعدادات الافتراضية بنجاح!');
+            }
+        }
+    </script>
+</body>
+</html>
