@@ -8,7 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="styles/bootstrap-rtl-custom.css">
+    <link rel="stylesheet" href="styles/bootstrap-                                <div class="col-md-6">
+                                    <label for="milestoneCompletionPercentage" class="form-label">نسبة الإنجاز المطلوبة للدفع</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="milestoneCompletionPercentage" placeholder="30" min="1" max="100" step="1" required>
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>custom.css">
     <style>
         .expense-card {
             border-left: 4px solid #007bff;
@@ -152,7 +158,8 @@
                                 <h4 class="h6">إجمالي المرحلة</h4>
                                 <p class="h4 text-primary">800,000 ر.ع</p>
                                 <span class="payment-status status-paid">تم الدفع</span>
-                                <p class="mt-2 small text-muted">تاريخ الدفع: 15 مارس 2025</p>
+                                <p class="mt-2 small text-muted">دُفعت عند الوصول إلى: 30% من المشروع</p>
+                                <p class="mt-1 small text-success">✓ تاريخ الدفع: 15 مارس 2025</p>
                             </div>
                         </div>
                     </div>
@@ -199,7 +206,7 @@
                                 <h4 class="h6">إجمالي المرحلة</h4>
                                 <p class="h4 text-info">950,000 ر.ع</p>
                                 <span class="payment-status status-pending">قيد المراجعة</span>
-                                <p class="mt-2 small text-muted">الدفع المتوقع: 30 يوليو 2025</p>
+                                <p class="mt-2 small text-muted">سيُدفع عند الوصول إلى: 70% من المشروع</p>
                             </div>
                         </div>
                     </div>
@@ -246,7 +253,7 @@
                                 <h4 class="h6">إجمالي المرحلة</h4>
                                 <p class="h4 text-warning">750,000 ر.ع</p>
                                 <span class="payment-status status-pending">مجدول</span>
-                                <p class="mt-2 small text-muted">الدفع المتوقع: 15 أكتوبر 2025</p>
+                                <p class="mt-2 small text-muted">سيُدفع عند الوصول إلى: 100% من المشروع</p>
                             </div>
                         </div>
                     </div>
@@ -329,7 +336,7 @@
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>التاريخ المحدد</th>
+                            <th>نسبة الإنجاز المطلوبة</th>
                             <th>نوع المدفوع</th>
                             <th>المرحلة/الفئة</th>
                             <th>المبلغ</th>
@@ -339,15 +346,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>30 يوليو 2025</td>
+                            <td>70% من المشروع</td>
                             <td>دفعة مرحلية</td>
                             <td>المرحلة الثانية</td>
                             <td>950,000 ر.ع</td>
                             <td><span class="payment-status status-pending">معلق</span></td>
-                            <td>في انتظار الفحص النهائي</td>
+                            <td>سيُدفع عند الوصول لنسبة الإنجاز المحددة</td>
                         </tr>
                         <tr>
-                            <td>31 يوليو 2025</td>
+                            <td>شهرياً</td>
                             <td>رواتب شهرية</td>
                             <td>الرواتب والأجور</td>
                             <td>60,000 ر.ع</td>
@@ -355,7 +362,7 @@
                             <td>راتب شهر يوليو</td>
                         </tr>
                         <tr>
-                            <td>31 يوليو 2025</td>
+                            <td>شهرياً</td>
                             <td>فواتير المرافق</td>
                             <td>المرافق والصيانة</td>
                             <td>14,500 ر.ع</td>
@@ -363,7 +370,7 @@
                             <td>كهرباء، مياه، صيانة</td>
                         </tr>
                         <tr>
-                            <td>15 أغسطس 2025</td>
+                            <td>عند الحاجة</td>
                             <td>صيانة طارئة</td>
                             <td>الصيانة</td>
                             <td>25,000 ر.ع</td>
@@ -371,7 +378,7 @@
                             <td>إصلاح الرافعة</td>
                         </tr>
                         <tr>
-                            <td>31 أغسطس 2025</td>
+                            <td>شهرياً</td>
                             <td>رواتب شهرية</td>
                             <td>الرواتب والأجور</td>
                             <td>60,000 ر.ع</td>
@@ -379,146 +386,29 @@
                             <td>راتب شهر أغسطس</td>
                         </tr>
                         <tr>
-                            <td>15 أكتوبر 2025</td>
+                            <td>100% من المشروع</td>
                             <td>دفعة مرحلية</td>
                             <td>المرحلة الثالثة</td>
                             <td>750,000 ر.ع</td>
                             <td><span class="payment-status status-pending">مجدول</span></td>
-                            <td>التشطيبات النهائية</td>
+                            <td>سيُدفع عند اكتمال المشروع</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- نماذج إدخال المصاريف والمدفوعات -->
-        <section id="forms-section" class="mb-5">
-            <div class="row">
-                <!-- نموذج إضافة مصروف جديد -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card border-primary">
-                        <div class="card-header bg-primary text-white">
-                            <h3 class="h5 mb-0">➕ إضافة مصروف جديد</h3>
-                        </div>
-                        <div class="card-body">
-                            <form id="expenseForm">
-                                <div class="mb-3">
-                                    <label for="expenseDescription" class="form-label">وصف المصروف</label>
-                                    <input type="text" class="form-control" id="expenseDescription" placeholder="مثل: مواد البناء، رواتب العمال، الكهرباء" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="expenseAmount" class="form-label">المبلغ (ر.ع)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="expenseAmount" placeholder="0.00" min="0" step="0.01" required>
-                                        <span class="input-group-text">ر.ع</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="expenseCategory" class="form-label">فئة المصروف</label>
-                                    <select class="form-select" id="expenseCategory" required>
-                                        <option value="">اختر الفئة</option>
-                                        <option value="construction">أعمال البناء</option>
-                                        <option value="materials">مواد البناء</option>
-                                        <option value="salaries">الرواتب والأجور</option>
-                                        <option value="utilities">المرافق والكهرباء</option>
-                                        <option value="maintenance">الصيانة</option>
-                                        <option value="equipment">المعدات والآلات</option>
-                                        <option value="other">أخرى</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="expenseDate" class="form-label">تاريخ المصروف</label>
-                                    <input type="date" class="form-control" id="expenseDate" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="expenseNotes" class="form-label">ملاحظات إضافية</label>
-                                    <textarea class="form-control" id="expenseNotes" rows="3" placeholder="أي ملاحظات أو تفاصيل إضافية..."></textarea>
-                                </div>
-                                
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">💾 حفظ المصروف</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- نموذج جدولة دفعة مرحلية جديدة -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card border-info">
-                        <div class="card-header bg-info text-white">
-                            <h3 class="h5 mb-0">📅 جدولة دفعة مرحلية جديدة</h3>
-                        </div>
-                        <div class="card-body">
-                            <form id="milestoneForm">
-                                <div class="mb-3">
-                                    <label for="milestoneTitle" class="form-label">عنوان المرحلة</label>
-                                    <input type="text" class="form-control" id="milestoneTitle" placeholder="مثل: المرحلة الرابعة - أعمال التشطيب النهائية" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="milestoneAmount" class="form-label">مبلغ الدفعة (ر.ع)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="milestoneAmount" placeholder="0.00" min="0" step="0.01" required>
-                                        <span class="input-group-text">ر.ع</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="milestoneDate" class="form-label">تاريخ الدفعة المتوقع</label>
-                                    <input type="date" class="form-control" id="milestoneDate" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="milestoneStatus" class="form-label">حالة المرحلة</label>
-                                    <select class="form-select" id="milestoneStatus" required>
-                                        <option value="">اختر الحالة</option>
-                                        <option value="scheduled">مجدولة</option>
-                                        <option value="in-progress">قيد التنفيذ</option>
-                                        <option value="completed">مكتملة</option>
-                                        <option value="pending">في انتظار الموافقة</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="milestoneContractor" class="form-label">المقاول/المورد</label>
-                                    <input type="text" class="form-control" id="milestoneContractor" placeholder="اسم الشركة أو المقاول المسؤول">
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="milestoneDescription" class="form-label">وصف أعمال المرحلة</label>
-                                    <textarea class="form-control" id="milestoneDescription" rows="3" placeholder="تفاصيل الأعمال المطلوب إنجازها في هذه المرحلة..." required></textarea>
-                                </div>
-                                
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-info">📋 جدولة المرحلة</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- الإجراءات السريعة -->
         <section class="text-center">
             <h2 class="h3 mb-4">الإجراءات السريعة</h2>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-3 mb-3">
-                    <button class="btn btn-primary btn-lg w-100" onclick="scrollToSection('forms-section')">
+                    <a href="expenses-management.html" class="btn btn-primary btn-lg w-100">
                         <i class="bi bi-plus-circle"></i><br>
-                        إضافة مصروف جديد
-                    </button>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <button class="btn btn-info btn-lg w-100" onclick="scrollToSection('forms-section')">
-                        <i class="bi bi-calendar-check"></i><br>
-                        جدولة دفعة
-                    </button>
+                        إدارة المصاريف والمراحل
+                    </a>
                 </div>
                 <div class="col-md-3 mb-3">
                     <button class="btn btn-success btn-lg w-100" onclick="exportReport()">
@@ -531,12 +421,6 @@
                         <i class="bi bi-file-earmark-excel"></i><br>
                         تصدير Excel مع تعليمات
                     </button>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <a href="expenses-management.html" class="btn btn-success btn-lg w-100">
-                        <i class="bi bi-calculator"></i><br>
-                        نظام إدارة المصاريف الكامل
-                    </a>
                 </div>
                 <div class="col-md-3 mb-3">
                     <a href="budget-settings.html" class="btn btn-warning btn-lg w-100">
@@ -585,73 +469,11 @@
                     this.style.transform = 'translateY(0)';
                 });
             });
-
-            // تعيين التاريخ الحالي كقيمة افتراضية
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('expenseDate').value = today;
-            
-            // التعامل مع نموذج المصروف
-            document.getElementById('expenseForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addNewExpense();
-            });
-            
-            // التعامل مع نموذج المرحلة
-            document.getElementById('milestoneForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addNewMilestone();
-            });
         });
 
-        // إضافة مصروف جديد
-        function addNewExpense() {
-            const description = document.getElementById('expenseDescription').value;
-            const amount = document.getElementById('expenseAmount').value;
-            const category = document.getElementById('expenseCategory').value;
-            const date = document.getElementById('expenseDate').value;
-            const notes = document.getElementById('expenseNotes').value;
 
-            if (!description || !amount || !category || !date) {
-                alert('يرجى ملء جميع الحقول المطلوبة');
-                return;
-            }
 
-            // هنا يمكن إضافة كود لحفظ البيانات في قاعدة البيانات
-            alert(`تم إضافة المصروف بنجاح:\nالوصف: ${description}\nالمبلغ: ${amount} ر.ع\nالفئة: ${getCategoryName(category)}\nالتاريخ: ${date}`);
-            
-            // إعادة تعيين النموذج
-            document.getElementById('expenseForm').reset();
-            document.getElementById('expenseDate').value = new Date().toISOString().split('T')[0];
-        }
 
-        // إضافة مرحلة جديدة
-        function addNewMilestone() {
-            const title = document.getElementById('milestoneTitle').value;
-            const amount = document.getElementById('milestoneAmount').value;
-            const date = document.getElementById('milestoneDate').value;
-            const status = document.getElementById('milestoneStatus').value;
-            const contractor = document.getElementById('milestoneContractor').value;
-            const description = document.getElementById('milestoneDescription').value;
-
-            if (!title || !amount || !date || !status || !description) {
-                alert('يرجى ملء جميع الحقول المطلوبة');
-                return;
-            }
-
-            // هنا يمكن إضافة كود لحفظ البيانات في قاعدة البيانات
-            alert(`تم جدولة المرحلة بنجاح:\nالعنوان: ${title}\nالمبلغ: ${amount} ر.ع\nالتاريخ: ${date}\nالحالة: ${getStatusName(status)}`);
-            
-            // إعادة تعيين النموذج
-            document.getElementById('milestoneForm').reset();
-        }
-
-        // التمرير إلى قسم معين
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
 
         // تصدير التقرير
         function exportReport() {
@@ -834,5 +656,8 @@
             return statuses[status] || status;
         }
     </script>
+
+    <!-- Admin Authentication -->
+    <script src="JS/adminAuth.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@ class ExpensesManager {
                 title: 'المرحلة الأولى: الأساسات والهيكل',
                 amount: 800000,
                 status: 'completed',
-                dueDate: '2025-03-15',
+                completionPercentage: 30,
                 paymentDate: '2025-03-15',
                 contractor: 'شركة البناء المتقدم',
                 description: 'أعمال الحفريات والأساسات والهيكل الخرساني',
@@ -53,7 +53,7 @@ class ExpensesManager {
                 title: 'المرحلة الثانية: البناء والتشطيبات الأساسية',
                 amount: 950000,
                 status: 'in-progress',
-                dueDate: '2025-07-30',
+                completionPercentage: 70,
                 paymentDate: null,
                 contractor: 'مقاولون متخصصون',
                 description: 'أعمال البناء والتشطيبات الأساسية',
@@ -70,7 +70,7 @@ class ExpensesManager {
                 title: 'المرحلة الثالثة: التشطيبات النهائية والتجهيزات',
                 amount: 750000,
                 status: 'scheduled',
-                dueDate: '2025-10-15',
+                completionPercentage: 100,
                 paymentDate: null,
                 contractor: 'شركة التشطيبات الفاخرة',
                 description: 'التشطيبات النهائية وتجهيز المحلات',
@@ -174,7 +174,7 @@ class ExpensesManager {
             id: this.currentEditingMilestone?.id || Date.now(),
             title: formData.get('milestoneTitle'),
             amount: parseFloat(formData.get('milestoneAmount')),
-            dueDate: formData.get('milestoneDate'),
+            completionPercentage: parseFloat(formData.get('milestoneCompletionPercentage')),
             status: formData.get('milestoneStatus'),
             contractor: formData.get('milestoneContractor') || '',
             description: formData.get('milestoneDescription'),
@@ -258,8 +258,8 @@ class ExpensesManager {
             return false;
         }
 
-        if (!milestone.dueDate) {
-            this.showMessage('يرجى إدخال تاريخ الاستحقاق', 'error');
+        if (!milestone.completionPercentage || milestone.completionPercentage <= 0 || milestone.completionPercentage > 100) {
+            this.showMessage('يرجى إدخال نسبة إنجاز صحيحة (1-100)', 'error');
             return false;
         }
 
@@ -363,9 +363,14 @@ class ExpensesManager {
                                 <p class="mt-2 small text-muted">
                                     ${milestone.paymentDate ? 
                                         `تاريخ الدفع: ${new Date(milestone.paymentDate).toLocaleDateString('ar-EG')}` : 
-                                        `الدفع المتوقع: ${new Date(milestone.dueDate).toLocaleDateString('ar-EG')}`
+                                        `يُدفع عند الوصول إلى: ${milestone.completionPercentage}% من المشروع`
                                     }
                                 </p>
+                                ${this.shouldShowPaymentButton(milestone) ? `
+                                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="expensesManager.markMilestoneAsPaid(${milestone.id})">
+                                        <i class="bi bi-check-circle"></i> تأكيد الدفع
+                                    </button>
+                                ` : ''}
                                 ${milestone.contractor ? `<p class="small text-muted">المقاول: ${milestone.contractor}</p>` : ''}
                             </div>
                         </div>
@@ -387,10 +392,15 @@ class ExpensesManager {
         const completionPercentage = (totalExpended / totalBudget) * 100;
 
         // تحديث العناصر في الصفحة
-        document.getElementById('totalBudget').textContent = `${totalBudget.toLocaleString()} ${this.budgetSettings.currency}`;
-        document.getElementById('totalExpended').textContent = `${totalExpended.toLocaleString()} ${this.budgetSettings.currency}`;
-        document.getElementById('totalRemaining').textContent = `${totalRemaining.toLocaleString()} ${this.budgetSettings.currency}`;
-        document.getElementById('completionPercentage').textContent = `${Math.round(completionPercentage)}%`;
+        const totalBudgetEl = document.getElementById('totalBudget');
+        const totalExpendedEl = document.getElementById('totalExpended');
+        const totalRemainingEl = document.getElementById('totalRemaining');
+        const completionPercentageEl = document.getElementById('completionPercentage');
+        
+        if (totalBudgetEl) totalBudgetEl.textContent = `${totalBudget.toLocaleString()} ${this.budgetSettings.currency}`;
+        if (totalExpendedEl) totalExpendedEl.textContent = `${totalExpended.toLocaleString()} ${this.budgetSettings.currency}`;
+        if (totalRemainingEl) totalRemainingEl.textContent = `${totalRemaining.toLocaleString()} ${this.budgetSettings.currency}`;
+        if (completionPercentageEl) completionPercentageEl.textContent = `${Math.round(completionPercentage)}%`;
         
         // تحديث شريط التقدم
         const progressBar = document.querySelector('.progress-bar');
@@ -407,6 +417,9 @@ class ExpensesManager {
             progressBar?.classList.add('bg-success');
             progressBar?.classList.remove('bg-warning');
         }
+
+        // إعادة تحميل المراحل لتحديث أزرار الدفع
+        this.loadMilestones();
     }
 
     // حساب إجمالي المبلغ المنفق
@@ -472,7 +485,7 @@ class ExpensesManager {
         // ملء النموذج بالبيانات
         document.getElementById('milestoneTitle').value = milestone.title;
         document.getElementById('milestoneAmount').value = milestone.amount;
-        document.getElementById('milestoneDate').value = milestone.dueDate;
+        document.getElementById('milestoneCompletionPercentage').value = milestone.completionPercentage;
         document.getElementById('milestoneStatus').value = milestone.status;
         document.getElementById('milestoneContractor').value = milestone.contractor || '';
         document.getElementById('milestoneDescription').value = milestone.description;
@@ -614,9 +627,9 @@ class ExpensesManager {
         });
         
         csvContent += "\n*** المراحل والدفعات ***\n";
-        csvContent += "المرحلة,المبلغ (ر.ع),الحالة,تاريخ الاستحقاق,المقاول,الوصف\n";
+        csvContent += "المرحلة,المبلغ (ر.ع),الحالة,نسبة الإنجاز المطلوبة,المقاول,الوصف\n";
         this.milestones.forEach(milestone => {
-            csvContent += `"${milestone.title}",${milestone.amount},"${this.getStatusName(milestone.status)}","${milestone.dueDate}","${milestone.contractor || ''}","${milestone.description}"\n`;
+            csvContent += `"${milestone.title}",${milestone.amount},"${this.getStatusName(milestone.status)}","${milestone.completionPercentage}%","${milestone.contractor || ''}","${milestone.description}"\n`;
         });
 
         // تنزيل الملف
@@ -644,6 +657,70 @@ class ExpensesManager {
         
         if (percentage >= this.budgetSettings.warningThreshold) {
             this.showMessage(`تحذير: تم استنفاد ${Math.round(percentage)}% من الميزانية`, 'warning');
+        }
+        
+        // التحقق من المراحل التي يجب دفعها حسب نسبة الإنجاز
+        this.checkMilestonePayments(percentage);
+    }
+
+    // التحقق من المراحل المستحقة للدفع حسب نسبة الإنجاز
+    checkMilestonePayments(currentCompletionPercentage) {
+        const payableMilestones = this.milestones.filter(milestone => 
+            milestone.status !== 'completed' && 
+            currentCompletionPercentage >= milestone.completionPercentage &&
+            !milestone.paymentDate
+        );
+
+        if (payableMilestones.length > 0) {
+            payableMilestones.forEach(milestone => {
+                this.showMessage(
+                    `تنبيه: المرحلة "${milestone.title}" مستحقة للدفع (تم الوصول إلى ${milestone.completionPercentage}% من المشروع)`, 
+                    'info'
+                );
+            });
+        }
+    }
+
+    // التحقق مما إذا كان يجب إظهار زر الدفع للمرحلة
+    shouldShowPaymentButton(milestone) {
+        if (milestone.paymentDate || milestone.status === 'completed') {
+            return false; // المرحلة مدفوعة بالفعل
+        }
+        
+        const currentCompletionPercentage = this.getCurrentProjectCompletion();
+        return currentCompletionPercentage >= milestone.completionPercentage;
+    }
+
+    // حساب نسبة الإنجاز الحالية للمشروع
+    getCurrentProjectCompletion() {
+        const totalExpended = this.calculateTotalExpended();
+        return (totalExpended / this.budgetSettings.totalBudget) * 100;
+    }
+
+    // تأكيد دفع المرحلة
+    markMilestoneAsPaid(milestoneId) {
+        const milestone = this.milestones.find(m => m.id === milestoneId);
+        if (!milestone) return;
+
+        const currentCompletion = this.getCurrentProjectCompletion();
+        
+        if (currentCompletion < milestone.completionPercentage) {
+            this.showMessage(
+                `لا يمكن دفع هذه المرحلة الآن. نسبة الإنجاز الحالية ${Math.round(currentCompletion)}% والمطلوب ${milestone.completionPercentage}%`, 
+                'warning'
+            );
+            return;
+        }
+
+        if (confirm(`هل أنت متأكد من تأكيد دفع "${milestone.title}"؟\n\nالمبلغ: ${milestone.amount.toLocaleString()} ${this.budgetSettings.currency}`)) {
+            milestone.paymentDate = new Date().toISOString().split('T')[0];
+            milestone.status = 'completed';
+            
+            this.saveData();
+            this.loadMilestones();
+            this.updateSummary();
+            
+            this.showMessage(`تم تأكيد دفع المرحلة "${milestone.title}" بنجاح!`, 'success');
         }
     }
 

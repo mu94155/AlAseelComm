@@ -259,3 +259,12 @@ align-items: center;
 --primary-color: #5400b4;
 --secondary-color: #b4a010;
 }
+
+/* Admin Authentication Styles */
+.admin-only {
+    display: none !important;
+}
+
+.admin-authenticated .admin-only {
+    display: block !important;
+}

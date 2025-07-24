@@ -17,7 +17,7 @@
         <div class="container">
             <div class="header-content text-center py-4">
                 <h1 class="display-4 mb-3">مجمع الأصيل التجاري</h1>
-                <img src="images/AlAseelCommComplex.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd img-fluid rounded">
+                <img src="images/AlaseelcommAdv.png" alt="مجمع الأصيل التجاري" class="AlaseelAdd img-fluid rounded">
                 <p class="lead">موقعنا هو بوابتك لكل ما يتعلق بمجمع الأصيل التجاري</p>
                 <p>نعرض في هذا الموقع مايخص المشروع من أخبار وعروض</p>
             </div>
@@ -40,11 +40,13 @@
                     <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link admin-link" href="admin.html">⚙️ إدارة الأخبار</a></li>
-                    <li class="nav-item"><a class="nav-link admin-link" href="customers.html">👥 إدارة العملاء</a></li>
-                    <li class="nav-item"><a class="nav-link admin-link" href="archive.html">📂 الأرشيف</a></li>
-                    <li class="nav-item"><a class="nav-link admin-link" href="backup-manager.html">💾 النسخ الاحتياطية</a></li>
-                    <li class="nav-item"><a class="nav-link admin-link" href="project-expenses.html">💰 مصاريف المشروع</a></li>
+                    <li class="nav-item"><a class="nav-link admin-link" href="admin-login.html">🔐 دخول الإدارة</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="admin.html">⚙️ إدارة الأخبار</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="customers.html">👥 إدارة العملاء</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="archive.html">📂 الأرشيف</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="backup-manager.html">💾 النسخ الاحتياطية</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="expenses-management.html">📊 إدارة المصاريف</a></li>
+                    <li class="nav-item admin-only"><a class="nav-link admin-link" href="project-expenses.html">💰 مصاريف المشروع</a></li>
                 </ul>
             </div>
         </div>
@@ -379,9 +381,37 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- تحميل ملفات JavaScript -->
+    <script src="JS/adminAuth.js"></script>
     <script src="data/todayNews.js"></script>
     <script src="JS/newsManager.js"></script>
     <script src="JS/home-01.js"></script>
     <script src="JS/debug.js"></script>
+    
+    <script>
+        // إظهار/إخفاء روابط الإدارة بناءً على حالة تسجيل الدخول
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginLink = document.querySelector('a[href="admin-login.html"]');
+            
+            if (adminAuth.isAuthenticated()) {
+                // إضافة class لإظهار روابط الإدارة
+                document.body.classList.add('admin-authenticated');
+                
+                // تغيير رابط تسجيل الدخول إلى تسجيل الخروج
+                if (loginLink) {
+                    loginLink.href = '#';
+                    loginLink.innerHTML = '🚪 تسجيل الخروج';
+                    loginLink.onclick = function(e) {
+                        e.preventDefault();
+                        if (confirm('هل تريد تسجيل الخروج من لوحة الإدارة؟')) {
+                            adminAuth.logout();
+                        }
+                    };
+                }
+            } else {
+                // التأكد من إخفاء روابط الإدارة
+                document.body.classList.remove('admin-authenticated');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -321,14 +321,17 @@
     </footer>
 
     <!-- ملفات JavaScript -->
+    <script src="JS/adminAuth.js"></script>
     <script src="JS/customersManager.js"></script>
     <script>
-        // إظهار نظام إدارة العملاء مباشرة
+        // إظهار نظام إدارة العملاء بعد المصادقة
         document.addEventListener('DOMContentLoaded', function() {
-            // إظهار لوحة الإدارة مباشرة بدون مصادقة
-            const adminPanel = document.querySelector('.admin-panel');
-            if (adminPanel) {
-                adminPanel.style.display = 'block';
+            // التحقق من المصادقة قبل إظهار لوحة الإدارة
+            if (adminAuth.isAuthenticated()) {
+                const adminPanel = document.querySelector('.admin-panel');
+                if (adminPanel) {
+                    adminPanel.style.display = 'block';
+                }
             }
         });
     </script>

@@ -174,10 +174,15 @@
                 <div class="col-md-3">
                     <h3 class="h4">نسبة الإنجاز</h3>
                     <p class="h2 mb-0" id="completionPercentage">0%</p>
+                    <small class="text-white-50">تحدد استحقاق المراحل للدفع</small>
                 </div>
             </div>
             <div class="progress progress-custom mt-3">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" title="نسبة إنجاز المشروع"></div>
+            </div>
+            <div class="mt-2 text-white-50 small">
+                <i class="bi bi-info-circle me-1"></i>
+                سيتم تفعيل أزرار الدفع للمراحل عند الوصول لنسبة الإنجاز المطلوبة
             </div>
         </div>
 
@@ -352,8 +357,12 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="milestoneDate" class="form-label">تاريخ الدفعة المتوقع *</label>
-                                    <input type="date" class="form-control" id="milestoneDate" name="milestoneDate" required>
+                                    <label for="milestoneCompletionPercentage" class="form-label">نسبة الإنجاز المطلوبة للدفع *</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="milestoneCompletionPercentage" name="milestoneCompletionPercentage" placeholder="30" min="1" max="100" step="1" required>
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <small class="text-muted">سيتم دفع هذه المرحلة عند الوصول إلى هذه النسبة من إنجاز المشروع</small>
                                 </div>
                                 
                                 <div class="mb-3">
@@ -647,5 +656,8 @@
             printWindow.print();
         }
     </script>
+
+    <!-- Admin Authentication -->
+    <script src="JS/adminAuth.js"></script>
 </body>
 </html>
