@@ -14,7 +14,6 @@ class AdminAuth {
         this.protectedPages = [
             'admin.html',
             'customers.html',
-            'archive.html',
             'backup-manager.html',
             'expenses-management.html',
             'project-expenses.html',
@@ -92,9 +91,11 @@ class AdminAuth {
         return false;
     }
 
-    logout() {
+    logout(preventRedirect = false) {
         localStorage.removeItem(this.authKey);
-        this.redirectToHome();
+        if (!preventRedirect) {
+            this.redirectToHome();
+        }
     }
 
     redirectToLogin() {
@@ -305,8 +306,16 @@ class AdminAuth {
         }, 100);
     }
 
-    // Add logout functionality to admin pages
+    // Add logout functionality to admin pages (but not homepage)
     addLogoutButton() {
+        const currentPage = window.location.pathname.split('/').pop();
+        const isHomepage = currentPage === 'Aseel-home-01.html' || currentPage === '';
+        
+        // Don't add logout button on homepage to avoid interface clutter
+        if (isHomepage) {
+            return;
+        }
+        
         const nav = document.querySelector('.navbar, nav');
         if (nav && !document.getElementById('admin-logout-btn')) {
             const logoutBtn = document.createElement('a');

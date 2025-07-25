@@ -354,9 +354,7 @@
                             <li class="mb-2"><a href="#services" class="text-decoration-none">خدماتنا</a></li>
                             <li class="mb-2"><a href="#support" class="text-decoration-none">الدعم الفني</a></li>
                             <li class="mb-2"><a href="#faq" class="text-decoration-none">الأسئلة الشائعة</a></li>
-                            <li class="mb-2"><a href="project-expenses.html" class="text-decoration-none text-primary fw-bold">💰 مصاريف المشروع والمدفوعات</a></li>
-                            <li class="mb-2"><a href="project-expenses.html#forms-section" class="text-decoration-none text-success">➕ إضافة مصروف جديد</a></li>
-                            <li class="mb-2"><a href="project-expenses.html#forms-section" class="text-decoration-none text-info">📅 جدولة دفعة مرحلية</a></li>
+                            <li class="mb-2"><a href="https://drive.google.com/drive/folders/18Apv7DpzRot1K82yK0tKPAaSgc3I4vgy?usp=drive_link" target="_blank" rel="noopener" class="text-decoration-none text-info fw-bold">📸 صور المشروع</a></li>
                         </ul>
                     </div>
                 </div>
@@ -386,32 +384,5 @@
     <script src="JS/newsManager.js"></script>
     <script src="JS/home-01.js"></script>
     <script src="JS/debug.js"></script>
-    
-    <script>
-        // إظهار/إخفاء روابط الإدارة بناءً على حالة تسجيل الدخول
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginLink = document.querySelector('a[href="admin-login.html"]');
-            
-            if (adminAuth.isAuthenticated()) {
-                // إضافة class لإظهار روابط الإدارة
-                document.body.classList.add('admin-authenticated');
-                
-                // تغيير رابط تسجيل الدخول إلى تسجيل الخروج
-                if (loginLink) {
-                    loginLink.href = '#';
-                    loginLink.innerHTML = '🚪 تسجيل الخروج';
-                    loginLink.onclick = function(e) {
-                        e.preventDefault();
-                        if (confirm('هل تريد تسجيل الخروج من لوحة الإدارة؟')) {
-                            adminAuth.logout();
-                        }
-                    };
-                }
-            } else {
-                // التأكد من إخفاء روابط الإدارة
-                document.body.classList.remove('admin-authenticated');
-            }
-        });
-    </script>
 </body>
 </html>
